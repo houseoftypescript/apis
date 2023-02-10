@@ -1,0 +1,41 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("POSTGRESQL_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model ForexCurrency {
+  code      String      @id
+  currency  String      @unique
+  favourite Boolean     @default(false)
+  ForexRate ForexRate[]
+}
+
+model ForexRate {
+  ForexCurrency ForexCurrency @relation(fields: [code], references: [code])
+  code          String
+  date          String
+  rate          Float         @default(0)
+
+  @@id([code, date])
+}
+
+model NewsSource {
+  id          String @id
+  name        String
+  description String
+  url         String
+  category    String
+  language    String
+  country     String
+}
+
+model TimeZone {
+  timezone     String @id
+  abbreviation String @default("")
+  utcOffset    String @default("")
+  rawOffset    Int    @default(0)
+}
