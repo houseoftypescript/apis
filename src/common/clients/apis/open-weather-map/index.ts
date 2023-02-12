@@ -1,15 +1,19 @@
 import environments from '../../../environments';
 import { get } from '../../../libs/axios';
-import { WeatherResponse } from './types';
+import { Lang, WeatherResponse } from './types';
 
 const BASE_URL = 'https://api.openweathermap.org/data/2.5';
 
-export const getCurrentWeather = async (
-  query: string
-): Promise<WeatherResponse> => {
+export const getCurrentWeather = async ({
+  lang,
+  query,
+}: {
+  lang: Lang;
+  query: string;
+}): Promise<WeatherResponse> => {
   const urlSearchParams = new URLSearchParams();
   urlSearchParams.set('q', query);
-  urlSearchParams.set('lang', 'vi');
+  urlSearchParams.set('lang', lang);
   urlSearchParams.set('units', 'metric');
   urlSearchParams.set('appid', environments.apiKey.openWeatherMap);
   const url = `${BASE_URL}/weather?${urlSearchParams.toString()}`;

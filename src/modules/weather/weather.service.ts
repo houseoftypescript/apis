@@ -1,10 +1,23 @@
 import { getCurrentWeather } from '../../common/clients/apis/open-weather-map';
-import { WeatherResponse } from '../../common/clients/apis/open-weather-map/types';
+import {
+  Lang,
+  WeatherResponse,
+} from '../../common/clients/apis/open-weather-map/types';
 import { Weather } from './weather.types';
 
-export const getWeather = async (query: string): Promise<Weather> => {
-  const currentWeather: WeatherResponse = await getCurrentWeather(query);
+export const getWeather = async ({
+  query,
+  lang = 'en',
+}: {
+  lang: Lang;
+  query: string;
+}): Promise<Weather> => {
+  const currentWeather: WeatherResponse = await getCurrentWeather({
+    query,
+    lang,
+  });
   const name: string = currentWeather.name || '';
+  const country: string = currentWeather.sys.country || '';
   const temperature: number = currentWeather.main.temp || 0;
   const maxTemperature: number = currentWeather.main.temp_max || 0;
   const minTemperature: number = currentWeather.main.temp_min || 0;
@@ -12,6 +25,7 @@ export const getWeather = async (query: string): Promise<Weather> => {
   const description: string = currentWeather.weather[0].description || '';
   return {
     name,
+    country,
     temperature,
     maxTemperature,
     minTemperature,

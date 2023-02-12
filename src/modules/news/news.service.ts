@@ -7,17 +7,140 @@ import { SyncResponse } from '../../common/models';
 import {
   Article,
   ArticlesResponse,
+  Category,
   GoogleTrendsByCountry,
+  Language,
+  SearchIn,
+  SortBy,
   SourcesResponse,
 } from './news.types';
+import redisClient from '../../common/clients/redis';
 
 const NEWS_BASE_URL = 'https://newsapi.org/v2';
 
-export const getHeadlines = async (): Promise<Article[]> => {
-  const url = `${NEWS_BASE_URL}/top-headlines?apiKey=${environments.apiKey.news}`;
+export const getNews = async (
+  {
+    query = '',
+    searchIn = '',
+    sources = [],
+    domains = [],
+    excludeDomains = [],
+    from = '',
+    to = '',
+    language = '',
+    sortBy = 'publishedAt',
+    pageSize = 100,
+    page = 1,
+  }: {
+    query?: string;
+    searchIn?: SearchIn;
+    sources?: string[];
+    domains?: string[];
+    excludeDomains?: string[];
+    from?: string;
+    to?: string;
+    language?: Language;
+    sortBy?: SortBy;
+    pageSize?: number;
+    page?: number;
+  } = {
+    query: '',
+    searchIn: '',
+    sources: [],
+    domains: [],
+    excludeDomains: [],
+    from: '',
+    to: '',
+    language: '',
+    sortBy: 'publishedAt',
+    pageSize: 100,
+    page: 1,
+  }
+): Promise<Article[]> => {
+  // Query Params
+  const urlSearchParams = new URLSearchParams();
+  urlSearchParams.set('apiKey', environments.apiKey.news);
+  urlSearchParams.set('sortBy', sortBy);
+  urlSearchParams.set('page', page.toString());
+  urlSearchParams.set('pageSize', pageSize.toString());
+  if (query !== '') urlSearchParams.set('q', query);
+  if (searchIn !== '') urlSearchParams.set('searchIn', searchIn);
+  if (sources.length !== 0) urlSearchParams.set('sources', sources.join(','));
+  if (domains.length !== 0) urlSearchParams.set('domains', domains.join(','));
+  if (excludeDomains.length !== 0)
+    urlSearchParams.set('excludeDomains', excludeDomains.join(','));
+  if (from !== '') urlSearchParams.set('from', from);
+  if (to !== '') urlSearchParams.set('to', to);
+  if (language !== '') urlSearchParams.set('language', language);
+  // Fetch Data
+  const url = `${NEWS_BASE_URL}/everything?${urlSearchParams.toString()}`;
   const data = await get<ArticlesResponse>(url);
   if (data.status !== 'ok') throw new Error('NEWS API ERROR');
   return data.articles;
+};
+
+export const getHeadlines = async (
+  {
+    query = '',
+    category = '',
+    country = '',
+    sources = [],
+    page = 1,
+    pageSize = 100,
+  }: {
+    query?: string;
+    category?: Category;
+    country?: string;
+    sources?: string[];
+    page?: number;
+    pageSize?: number;
+  } = {
+    query: '',
+    category: '',
+    country: '',
+    sources: [],
+    page: 1,
+    pageSize: 100,
+  }
+): Promise<Article[]> => {
+  try {
+    // Connect to Redis
+    let key = 'news-headlines';
+    if (category !== '') key += `-${category}`;
+    if (country !== '') key += `-${country}`;
+    if (page !== 0) key += `-${page}`;
+    logger.info(`getHeadlines key ${key}`);
+    await redisClient.connect();
+    // Fetch from Cache
+    const articlesString = await redisClient.get(key);
+    if (articlesString !== null) {
+      let cacheArticles: Article[] = JSON.parse(articlesString) as Article[];
+      cacheArticles = cacheArticles.slice(0, pageSize);
+      return cacheArticles;
+    }
+    // Fetch Data
+    const urlSearchParams = new URLSearchParams();
+    urlSearchParams.set('apiKey', environments.apiKey.news);
+    urlSearchParams.set('page', page.toString());
+    urlSearchParams.set('pageSize', pageSize.toString());
+    if (query !== '') urlSearchParams.set('q', query);
+    if (country !== '') urlSearchParams.set('country', country);
+    if (category !== '') urlSearchParams.set('category', category);
+    if (sources.length !== 0) urlSearchParams.set('sources', sources.join(','));
+    const url = `${NEWS_BASE_URL}/top-headlines?${urlSearchParams.toString()}`;
+    logger.info(`url ${url}`);
+    const data = await get<ArticlesResponse>(url);
+    if (data.status !== 'ok') throw new Error('NEWS API ERROR');
+    // Set to Cache
+    const { articles = [] } = data;
+    await redisClient.set(key, JSON.stringify(articles), { EX: 60 * 60 });
+    return articles;
+  } catch (error) {
+    logger.error(`getHeadlines Error ${error}`);
+    throw new Error('Error');
+  } finally {
+    await redisClient.disconnect();
+  }
 };
 
 export const getSources = async (): Promise<NewsSource[]> => {
@@ -44,7 +167,9 @@ export const syncSources = async (): Promise<SyncResponse> => {
     await prismaClient.$connect();
     logger.info('PostgreSQL is connected');
     // Get Sources from News API
-    const url = `${NEWS_BASE_URL}/sources?apiKey=${environments.apiKey.news}`;
+    const urlSearchParams = new URLSearchParams();
+    urlSearchParams.set('apiKey', environments.apiKey.news);
+    const url = `${NEWS_BASE_URL}/sources?${urlSearchParams.toString()}`;
     const data = await get<SourcesResponse>(url);
     if (data.status !== 'ok') throw new Error('NEWS API ERROR');
     const { sources = [] } = data;

@@ -36,7 +36,7 @@ export const getTimeZone = async (timezone: string): Promise<TimeZone> => {
     return timeZone;
   } catch (error) {
     logger.error(`getTimeZones Error: ${error}`);
-    throw new Error(error as any);
+    throw new Error('getTimeZones Error');
   } finally {
     // Disconnect from PostgreSQL
     await prismaClient.$disconnect();

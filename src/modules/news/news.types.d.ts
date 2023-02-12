@@ -28,7 +28,7 @@ export type GoogleTrendsByCountry = {
   trends: string[];
 };
 
-export type Country =
+export type CountryCode =
   | 'ae'
   | 'ar'
   | 'at'
@@ -82,7 +82,8 @@ export type Country =
   | 'ua'
   | 'us'
   | 've'
-  | 'za';
+  | 'za'
+  | '';
 
 type Category =
   | 'business'
@@ -91,7 +92,8 @@ type Category =
   | 'health'
   | 'science'
   | 'sports'
-  | 'technology';
+  | 'technology'
+  | '';
 
 type Language =
   | 'ar'
@@ -107,4 +109,9 @@ type Language =
   | 'ru'
   | 'sv'
   | 'ud'
-  | 'zh';
+  | 'zh'
+  | '';
+
+export type SearchIn = 'title' | 'description' | 'content' | '';
+
+type SortBy = 'relevancy' | 'popularity' | 'publishedAt';

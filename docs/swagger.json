@@ -1965,19 +1965,6 @@
         "type": "object",
         "description": "Model ForexCurrency"
       },
-      "SyncResponse": {
-        "properties": {
-          "count": {
-            "type": "number",
-            "format": "double"
-          },
-          "status": {
-            "type": "string"
-          }
-        },
-        "required": ["count", "status"],
-        "type": "object"
-      },
       "ForexRate": {
         "properties": {
           "rate": {
@@ -2042,6 +2029,107 @@
           "source"
         ],
         "type": "object"
+      },
+      "SearchIn": {
+        "type": "string",
+        "enum": ["title", "description", "content", ""]
+      },
+      "Language": {
+        "type": "string",
+        "enum": [
+          "ar",
+          "de",
+          "en",
+          "es",
+          "fr",
+          "he",
+          "it",
+          "nl",
+          "no",
+          "pt",
+          "ru",
+          "sv",
+          "ud",
+          "zh",
+          ""
+        ]
+      },
+      "SortBy": {
+        "type": "string",
+        "enum": ["relevancy", "popularity", "publishedAt"]
+      },
+      "CountryCode": {
+        "type": "string",
+        "enum": [
+          "ae",
+          "ar",
+          "at",
+          "au",
+          "be",
+          "bg",
+          "br",
+          "ca",
+          "ch",
+          "cn",
+          "co",
+          "cu",
+          "cz",
+          "de",
+          "eg",
+          "fr",
+          "gb",
+          "gr",
+          "hk",
+          "hu",
+          "id",
+          "ie",
+          "il",
+          "in",
+          "it",
+          "jp",
+          "kr",
+          "lt",
+          "lv",
+          "ma",
+          "mx",
+          "my",
+          "ng",
+          "nl",
+          "no",
+          "nz",
+          "ph",
+          "pl",
+          "pt",
+          "ro",
+          "rs",
+          "ru",
+          "sa",
+          "se",
+          "sg",
+          "si",
+          "sk",
+          "th",
+          "tr",
+          "tw",
+          "ua",
+          "us",
+          "ve",
+          "za",
+          ""
+        ]
+      },
+      "Category": {
+        "type": "string",
+        "enum": [
+          "business",
+          "entertainment",
+          "general",
+          "health",
+          "science",
+          "sports",
+          "technology",
+          ""
+        ]
       },
       "NewsSource": {
         "properties": {
@@ -2134,6 +2222,9 @@
           "main": {
             "type": "string"
           },
+          "country": {
+            "type": "string"
+          },
           "name": {
             "type": "string"
           }
@@ -2144,9 +2235,63 @@
           "temperature",
           "description",
           "main",
+          "country",
           "name"
         ],
         "type": "object"
+      },
+      "Lang": {
+        "type": "string",
+        "enum": [
+          "af",
+          "al",
+          "ar",
+          "az",
+          "bg",
+          "ca",
+          "cz",
+          "da",
+          "de",
+          "el",
+          "en",
+          "es",
+          "fa",
+          "fi",
+          "fr",
+          "gl",
+          "he",
+          "hi",
+          "hr",
+          "hu",
+          "id",
+          "it",
+          "ja",
+          "kr",
+          "la",
+          "lt",
+          "mk",
+          "no",
+          "nl",
+          "pl",
+          "pt",
+          "pt_br",
+          "ro",
+          "ru",
+          "se",
+          "sk",
+          "sl",
+          "sp",
+          "sr",
+          "sv",
+          "th",
+          "tr",
+          "ua",
+          "uk",
+          "vi",
+          "zh_cn",
+          "zh_tw",
+          "zu"
+        ]
       }
     },
     "securitySchemes": {}
@@ -2211,26 +2356,6 @@
         "parameters": []
       }
     },
-    "/api/forex/currencies/sync": {
-      "post": {
-        "operationId": "SyncCurrencies",
-        "responses": {
-          "200": {
-            "description": "Sync Forex Currencies",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/SyncResponse"
-                }
-              }
-            }
-          }
-        },
-        "tags": ["Forex"],
-        "security": [],
-        "parameters": []
-      }
-    },
     "/api/forex/rates": {
       "get": {
         "operationId": "GetRates",
@@ -2244,26 +2369,6 @@
                     "$ref": "#/components/schemas/ForexRate"
                   },
                   "type": "array"
-                }
-              }
-            }
-          }
-        },
-        "tags": ["Forex"],
-        "security": [],
-        "parameters": []
-      }
-    },
-    "/api/forex/rates/sync": {
-      "post": {
-        "operationId": "SyncRates",
-        "responses": {
-          "200": {
-            "description": "Sync Forex Rates",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/SyncResponse"
                 }
               }
             }
@@ -2300,6 +2405,101 @@
         "parameters": []
       }
     },
+    "/api/news": {
+      "get": {
+        "operationId": "GetNews",
+        "responses": {
+          "200": {
+            "description": "Get News",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/Article"
+                  },
+                  "type": "array"
+                }
+              }
+            }
+          }
+        },
+        "tags": ["News"],
+        "security": [],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "query",
+            "required": false,
+            "schema": {
+              "default": "",
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "searchIn",
+            "required": false,
+            "schema": {
+              "$ref": "#/components/schemas/SearchIn"
+            }
+          },
+          {
+            "in": "query",
+            "name": "from",
+            "required": false,
+            "schema": {
+              "default": "",
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "to",
+            "required": false,
+            "schema": {
+              "default": "",
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "language",
+            "required": false,
+            "schema": {
+              "$ref": "#/components/schemas/Language"
+            }
+          },
+          {
+            "in": "query",
+            "name": "sortBy",
+            "required": false,
+            "schema": {
+              "$ref": "#/components/schemas/SortBy"
+            }
+          },
+          {
+            "in": "query",
+            "name": "page",
+            "required": false,
+            "schema": {
+              "default": 1,
+              "format": "double",
+              "type": "number"
+            }
+          },
+          {
+            "in": "query",
+            "name": "pageSize",
+            "required": false,
+            "schema": {
+              "default": 100,
+              "format": "double",
+              "type": "number"
+            }
+          }
+        ]
+      }
+    },
     "/api/news/headlines": {
       "get": {
         "operationId": "GetHeadlines",
@@ -2320,7 +2520,53 @@
         },
         "tags": ["News"],
         "security": [],
-        "parameters": []
+        "parameters": [
+          {
+            "in": "query",
+            "name": "query",
+            "required": false,
+            "schema": {
+              "default": "",
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "country",
+            "required": false,
+            "schema": {
+              "$ref": "#/components/schemas/CountryCode"
+            }
+          },
+          {
+            "in": "query",
+            "name": "category",
+            "required": false,
+            "schema": {
+              "$ref": "#/components/schemas/Category"
+            }
+          },
+          {
+            "in": "query",
+            "name": "page",
+            "required": false,
+            "schema": {
+              "default": 1,
+              "format": "double",
+              "type": "number"
+            }
+          },
+          {
+            "in": "query",
+            "name": "pageSize",
+            "required": false,
+            "schema": {
+              "default": 100,
+              "format": "double",
+              "type": "number"
+            }
+          }
+        ]
       }
     },
     "/api/news/sources": {
@@ -2336,26 +2582,6 @@
                     "$ref": "#/components/schemas/NewsSource"
                   },
                   "type": "array"
-                }
-              }
-            }
-          }
-        },
-        "tags": ["News"],
-        "security": [],
-        "parameters": []
-      }
-    },
-    "/api/news/sources/sync": {
-      "get": {
-        "operationId": "SyncSources",
-        "responses": {
-          "200": {
-            "description": "Sync Sources",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/SyncResponse"
                 }
               }
             }
@@ -2467,26 +2693,6 @@
         ]
       }
     },
-    "/api/time-zones/sync": {
-      "post": {
-        "operationId": "SyncTimeZones",
-        "responses": {
-          "200": {
-            "description": "Get TimeZones",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/SyncResponse"
-                }
-              }
-            }
-          }
-        },
-        "tags": ["TimeZones"],
-        "security": [],
-        "parameters": []
-      }
-    },
     "/api/weather": {
       "get": {
         "operationId": "GetWeather",
@@ -2512,6 +2718,14 @@
             "schema": {
               "default": "",
               "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "lang",
+            "required": false,
+            "schema": {
+              "$ref": "#/components/schemas/Lang"
             }
           }
         ]

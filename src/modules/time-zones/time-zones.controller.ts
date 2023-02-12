@@ -1,15 +1,6 @@
 import { TimeZone } from '@prisma/client';
-import {
-  Controller,
-  Get,
-  Path,
-  Post,
-  Route,
-  SuccessResponse,
-  Tags,
-} from 'tsoa';
-import { SyncResponse } from '../../common/models';
-import { getTimeZone, getTimeZones, syncTimeZones } from './time-zones.service';
+import { Controller, Get, Path, Route, SuccessResponse, Tags } from 'tsoa';
+import { getTimeZone, getTimeZones } from './time-zones.service';
 
 @Tags('TimeZones')
 @Route('api/time-zones')
@@ -26,11 +17,5 @@ export class TimeZonesController extends Controller {
     @Path('timeZone') timeZone: string
   ): Promise<TimeZone> {
     return getTimeZone(timeZone);
-  }
-
-  @Post('sync')
-  @SuccessResponse('200', 'Get TimeZones')
-  public async syncTimeZones(): Promise<SyncResponse> {
-    return syncTimeZones();
   }
 }
