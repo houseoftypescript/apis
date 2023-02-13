@@ -191,7 +191,9 @@ export const syncSources = async (): Promise<SyncResponse> => {
   }
 };
 
-export const getGoogleTrends = async (): Promise<GoogleTrendsByCountry[]> => {
+export const getGoogleTrends = async (
+  country: string
+): Promise<GoogleTrendsByCountry[]> => {
   const url =
     'https://trends.google.com/trends/hottrends/visualize/internal/data';
   const data = await get<Record<string, string[]>>(url);
@@ -202,5 +204,14 @@ export const getGoogleTrends = async (): Promise<GoogleTrendsByCountry[]> => {
       const trends = (data[key] || []).sort();
       return { country, trends };
     })
+    .filter(({ country: c }) => (country === '' ? true : c === country))
     .sort((a, b) => (a.country > b.country ? 1 : -1));
+};
+
+export const getGoogleTrendsCoutries = async (): Promise<string[]> => {
+  const url =
+    'https://trends.google.com/trends/hottrends/visualize/internal/data';
+  const data = await get<Record<string, string[]>>(url);
+  const keys: string[] = Object.keys(data);
+  return keys.map((key) => key.split('_').join(' ')).sort();
 };

@@ -2,6 +2,7 @@ import { NewsSource } from '@prisma/client';
 import { Controller, Get, Query, Route, SuccessResponse, Tags } from 'tsoa';
 import {
   getGoogleTrends,
+  getGoogleTrendsCoutries,
   getHeadlines,
   getNews,
   getSources,
@@ -61,9 +62,17 @@ export class NewsController extends Controller {
     return getSources();
   }
 
-  @Get('/google/trends')
-  @SuccessResponse('200', 'Google Trends')
-  public getGoogleTrends(): Promise<GoogleTrendsByCountry[]> {
-    return getGoogleTrends();
+  @Get('/google-trends')
+  @SuccessResponse('200', 'Get Google Trends')
+  public getGoogleTrends(
+    @Query('country') country = ''
+  ): Promise<GoogleTrendsByCountry[]> {
+    return getGoogleTrends(country);
+  }
+
+  @Get('/google-trends/countries')
+  @SuccessResponse('200', 'Get Google Trends')
+  public getGoogleTrendsCoutries(): Promise<string[]> {
+    return getGoogleTrendsCoutries();
   }
 }

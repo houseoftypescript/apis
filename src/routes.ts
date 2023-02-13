@@ -1980,13 +1980,53 @@ export function RegisterRoutes(app: Router) {
   );
   // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
   app.get(
-    '/api/news/google/trends',
+    '/api/news/google-trends',
     ...fetchMiddlewares<RequestHandler>(NewsController),
     ...fetchMiddlewares<RequestHandler>(
       NewsController.prototype.getGoogleTrends
     ),
 
     function NewsController_getGoogleTrends(
+      request: any,
+      response: any,
+      next: any
+    ) {
+      const args = {
+        country: {
+          default: '',
+          in: 'query',
+          name: 'country',
+          dataType: 'string',
+        },
+      };
+
+      // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+      let validatedArgs: any[] = [];
+      try {
+        validatedArgs = getValidatedArgs(args, request, response);
+
+        const controller = new NewsController();
+
+        const promise = controller.getGoogleTrends.apply(
+          controller,
+          validatedArgs as any
+        );
+        promiseHandler(controller, promise, response, 200, next);
+      } catch (err) {
+        return next(err);
+      }
+    }
+  );
+  // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+  app.get(
+    '/api/news/google-trends/countries',
+    ...fetchMiddlewares<RequestHandler>(NewsController),
+    ...fetchMiddlewares<RequestHandler>(
+      NewsController.prototype.getGoogleTrendsCoutries
+    ),
+
+    function NewsController_getGoogleTrendsCoutries(
       request: any,
       response: any,
       next: any
@@ -2001,7 +2041,7 @@ export function RegisterRoutes(app: Router) {
 
         const controller = new NewsController();
 
-        const promise = controller.getGoogleTrends.apply(
+        const promise = controller.getGoogleTrendsCoutries.apply(
           controller,
           validatedArgs as any
         );

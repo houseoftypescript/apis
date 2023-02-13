@@ -3757,17 +3757,50 @@
         "parameters": []
       }
     },
-    "/api/news/google/trends": {
+    "/api/news/google-trends": {
       "get": {
         "operationId": "GetGoogleTrends",
         "responses": {
           "200": {
-            "description": "Google Trends",
+            "description": "Get Google Trends",
             "content": {
               "application/json": {
                 "schema": {
                   "items": {
                     "$ref": "#/components/schemas/GoogleTrendsByCountry"
+                  },
+                  "type": "array"
+                }
+              }
+            }
+          }
+        },
+        "tags": ["News"],
+        "security": [],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "country",
+            "required": false,
+            "schema": {
+              "default": "",
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/api/news/google-trends/countries": {
+      "get": {
+        "operationId": "GetGoogleTrendsCoutries",
+        "responses": {
+          "200": {
+            "description": "Get Google Trends",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "type": "string"
                   },
                   "type": "array"
                 }
