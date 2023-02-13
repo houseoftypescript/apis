@@ -14,6 +14,8 @@ import {
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 import { CountriesController } from './modules/countries/countries.controller';
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+import { FootballController } from './modules/football/football.controller';
+// WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 import { ForexController } from './modules/forex/forex.controller';
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 import { HealthController } from './modules/health/health.controller';
@@ -752,6 +754,459 @@ const models: TsoaRoute.Models = {
     additionalProperties: false,
   },
   // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+  Competition: {
+    dataType: 'refAlias',
+    type: {
+      dataType: 'nestedObjectLiteral',
+      nestedProperties: {
+        lastUpdated: { dataType: 'string', required: true },
+        numberOfAvailableSeasons: { dataType: 'double', required: true },
+        currentSeason: {
+          dataType: 'nestedObjectLiteral',
+          nestedProperties: {
+            winner: {
+              dataType: 'nestedObjectLiteral',
+              nestedProperties: {
+                lastUpdated: { dataType: 'string', required: true },
+                venue: { dataType: 'string', required: true },
+                clubColors: { dataType: 'string', required: true },
+                founded: { dataType: 'double', required: true },
+                website: { dataType: 'string', required: true },
+                address: { dataType: 'string', required: true },
+                crest: { dataType: 'string', required: true },
+                tla: { dataType: 'string', required: true },
+                shortName: { dataType: 'string', required: true },
+                name: { dataType: 'string', required: true },
+                id: { dataType: 'double', required: true },
+              },
+              required: true,
+            },
+            currentMatchday: { dataType: 'double', required: true },
+            endDate: { dataType: 'string', required: true },
+            startDate: { dataType: 'string', required: true },
+            id: { dataType: 'double', required: true },
+          },
+          required: true,
+        },
+        plan: { dataType: 'string', required: true },
+        emblem: { dataType: 'string', required: true },
+        type: { dataType: 'string', required: true },
+        code: { dataType: 'string', required: true },
+        name: { dataType: 'string', required: true },
+        area: {
+          dataType: 'nestedObjectLiteral',
+          nestedProperties: {
+            flag: { dataType: 'string', required: true },
+            code: { dataType: 'string', required: true },
+            name: { dataType: 'string', required: true },
+            id: { dataType: 'double', required: true },
+          },
+          required: true,
+        },
+        id: { dataType: 'double', required: true },
+      },
+      validators: {},
+    },
+  },
+  // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+  Team: {
+    dataType: 'refAlias',
+    type: {
+      dataType: 'nestedObjectLiteral',
+      nestedProperties: {
+        lastUpdated: { dataType: 'string', required: true },
+        venue: { dataType: 'string', required: true },
+        clubColors: { dataType: 'string', required: true },
+        founded: { dataType: 'double', required: true },
+        website: { dataType: 'string', required: true },
+        address: { dataType: 'string', required: true },
+        crest: { dataType: 'string', required: true },
+        tla: { dataType: 'string', required: true },
+        shortName: { dataType: 'string', required: true },
+        name: { dataType: 'string', required: true },
+        id: { dataType: 'double', required: true },
+      },
+      validators: {},
+    },
+  },
+  // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+  Match: {
+    dataType: 'refAlias',
+    type: {
+      dataType: 'nestedObjectLiteral',
+      nestedProperties: {
+        referees: {
+          dataType: 'array',
+          array: {
+            dataType: 'nestedObjectLiteral',
+            nestedProperties: {
+              nationality: { dataType: 'string', required: true },
+              type: { dataType: 'string', required: true },
+              name: { dataType: 'string', required: true },
+              id: { dataType: 'double', required: true },
+            },
+          },
+          required: true,
+        },
+        odds: {
+          dataType: 'nestedObjectLiteral',
+          nestedProperties: {
+            awayWin: { dataType: 'double', required: true },
+            draw: { dataType: 'double', required: true },
+            homeWin: { dataType: 'double', required: true },
+          },
+          required: true,
+        },
+        substitutions: {
+          dataType: 'array',
+          array: {
+            dataType: 'nestedObjectLiteral',
+            nestedProperties: {
+              playerIn: {
+                dataType: 'nestedObjectLiteral',
+                nestedProperties: {
+                  name: { dataType: 'string', required: true },
+                  id: { dataType: 'double', required: true },
+                },
+                required: true,
+              },
+              playerOut: {
+                dataType: 'nestedObjectLiteral',
+                nestedProperties: {
+                  name: { dataType: 'string', required: true },
+                  id: { dataType: 'double', required: true },
+                },
+                required: true,
+              },
+              team: {
+                dataType: 'nestedObjectLiteral',
+                nestedProperties: {
+                  name: { dataType: 'string', required: true },
+                  id: { dataType: 'double', required: true },
+                },
+                required: true,
+              },
+              minute: { dataType: 'double', required: true },
+            },
+          },
+          required: true,
+        },
+        bookings: {
+          dataType: 'array',
+          array: {
+            dataType: 'nestedObjectLiteral',
+            nestedProperties: {
+              card: { dataType: 'string', required: true },
+              player: {
+                dataType: 'nestedObjectLiteral',
+                nestedProperties: {
+                  name: { dataType: 'string', required: true },
+                  id: { dataType: 'double', required: true },
+                },
+                required: true,
+              },
+              team: {
+                dataType: 'nestedObjectLiteral',
+                nestedProperties: {
+                  name: { dataType: 'string', required: true },
+                  id: { dataType: 'double', required: true },
+                },
+                required: true,
+              },
+              minute: { dataType: 'double', required: true },
+            },
+          },
+          required: true,
+        },
+        penalties: {
+          dataType: 'array',
+          array: {
+            dataType: 'nestedObjectLiteral',
+            nestedProperties: {
+              scored: { dataType: 'boolean', required: true },
+              team: {
+                dataType: 'nestedObjectLiteral',
+                nestedProperties: {
+                  name: { dataType: 'string', required: true },
+                  id: { dataType: 'double', required: true },
+                },
+                required: true,
+              },
+              player: {
+                dataType: 'nestedObjectLiteral',
+                nestedProperties: {
+                  name: { dataType: 'string', required: true },
+                  id: { dataType: 'double', required: true },
+                },
+                required: true,
+              },
+            },
+          },
+          required: true,
+        },
+        goals: {
+          dataType: 'array',
+          array: {
+            dataType: 'nestedObjectLiteral',
+            nestedProperties: {
+              score: {
+                dataType: 'nestedObjectLiteral',
+                nestedProperties: {
+                  away: { dataType: 'double', required: true },
+                  home: { dataType: 'double', required: true },
+                },
+                required: true,
+              },
+              assist: {
+                dataType: 'union',
+                subSchemas: [
+                  {
+                    dataType: 'nestedObjectLiteral',
+                    nestedProperties: {
+                      name: { dataType: 'string', required: true },
+                      id: { dataType: 'double', required: true },
+                    },
+                  },
+                  { dataType: 'enum', enums: [null] },
+                ],
+                required: true,
+              },
+              scorer: {
+                dataType: 'nestedObjectLiteral',
+                nestedProperties: {
+                  name: { dataType: 'string', required: true },
+                  id: { dataType: 'double', required: true },
+                },
+                required: true,
+              },
+              team: {
+                dataType: 'nestedObjectLiteral',
+                nestedProperties: {
+                  name: { dataType: 'string', required: true },
+                  id: { dataType: 'double', required: true },
+                },
+                required: true,
+              },
+              type: { dataType: 'string', required: true },
+              injuryTime: { dataType: 'double', required: true },
+              minute: { dataType: 'double', required: true },
+            },
+          },
+          required: true,
+        },
+        score: {
+          dataType: 'nestedObjectLiteral',
+          nestedProperties: {
+            halfTime: {
+              dataType: 'nestedObjectLiteral',
+              nestedProperties: {
+                away: { dataType: 'double', required: true },
+                home: { dataType: 'double', required: true },
+              },
+              required: true,
+            },
+            fullTime: {
+              dataType: 'nestedObjectLiteral',
+              nestedProperties: {
+                away: { dataType: 'double', required: true },
+                home: { dataType: 'double', required: true },
+              },
+              required: true,
+            },
+            duration: { dataType: 'string', required: true },
+            winner: { dataType: 'string', required: true },
+          },
+          required: true,
+        },
+        awayTeam: {
+          dataType: 'nestedObjectLiteral',
+          nestedProperties: {
+            statistics: {
+              dataType: 'nestedObjectLiteral',
+              nestedProperties: {
+                red_cards: { dataType: 'double', required: true },
+                yellow_red_cards: { dataType: 'double', required: true },
+                yellow_cards: { dataType: 'double', required: true },
+                shots_off_goal: { dataType: 'double', required: true },
+                shots_on_goal: { dataType: 'double', required: true },
+                shots: { dataType: 'double', required: true },
+                throw_ins: { dataType: 'double', required: true },
+                saves: { dataType: 'double', required: true },
+                ball_possession: { dataType: 'double', required: true },
+                fouls: { dataType: 'double', required: true },
+                offsides: { dataType: 'double', required: true },
+                goal_kicks: { dataType: 'double', required: true },
+                free_kicks: { dataType: 'double', required: true },
+                corner_kicks: { dataType: 'double', required: true },
+              },
+              required: true,
+            },
+            bench: {
+              dataType: 'array',
+              array: {
+                dataType: 'nestedObjectLiteral',
+                nestedProperties: {
+                  shirtNumber: { dataType: 'double', required: true },
+                  position: { dataType: 'string', required: true },
+                  name: { dataType: 'string', required: true },
+                  id: { dataType: 'double', required: true },
+                },
+              },
+              required: true,
+            },
+            lineup: {
+              dataType: 'array',
+              array: {
+                dataType: 'nestedObjectLiteral',
+                nestedProperties: {
+                  shirtNumber: { dataType: 'double', required: true },
+                  position: { dataType: 'string', required: true },
+                  name: { dataType: 'string', required: true },
+                  id: { dataType: 'double', required: true },
+                },
+              },
+              required: true,
+            },
+            formation: { dataType: 'string', required: true },
+            leagueRank: { dataType: 'enum', enums: [null], required: true },
+            coach: {
+              dataType: 'nestedObjectLiteral',
+              nestedProperties: {
+                nationality: { dataType: 'string', required: true },
+                name: { dataType: 'string', required: true },
+                id: { dataType: 'double', required: true },
+              },
+              required: true,
+            },
+            crest: { dataType: 'string', required: true },
+            tla: { dataType: 'string', required: true },
+            shortName: { dataType: 'string', required: true },
+            name: { dataType: 'string', required: true },
+            id: { dataType: 'double', required: true },
+          },
+          required: true,
+        },
+        homeTeam: {
+          dataType: 'nestedObjectLiteral',
+          nestedProperties: {
+            statistics: {
+              dataType: 'nestedObjectLiteral',
+              nestedProperties: {
+                red_cards: { dataType: 'double', required: true },
+                yellow_red_cards: { dataType: 'double', required: true },
+                yellow_cards: { dataType: 'double', required: true },
+                shots_off_goal: { dataType: 'double', required: true },
+                shots_on_goal: { dataType: 'double', required: true },
+                shots: { dataType: 'double', required: true },
+                throw_ins: { dataType: 'double', required: true },
+                saves: { dataType: 'double', required: true },
+                ball_possession: { dataType: 'double', required: true },
+                fouls: { dataType: 'double', required: true },
+                offsides: { dataType: 'double', required: true },
+                goal_kicks: { dataType: 'double', required: true },
+                free_kicks: { dataType: 'double', required: true },
+                corner_kicks: { dataType: 'double', required: true },
+              },
+              required: true,
+            },
+            bench: {
+              dataType: 'array',
+              array: {
+                dataType: 'nestedObjectLiteral',
+                nestedProperties: {
+                  shirtNumber: { dataType: 'double', required: true },
+                  position: { dataType: 'string', required: true },
+                  name: { dataType: 'string', required: true },
+                  id: { dataType: 'double', required: true },
+                },
+              },
+              required: true,
+            },
+            lineup: {
+              dataType: 'array',
+              array: {
+                dataType: 'nestedObjectLiteral',
+                nestedProperties: {
+                  shirtNumber: { dataType: 'double', required: true },
+                  position: { dataType: 'string', required: true },
+                  name: { dataType: 'string', required: true },
+                  id: { dataType: 'double', required: true },
+                },
+              },
+              required: true,
+            },
+            formation: { dataType: 'string', required: true },
+            leagueRank: { dataType: 'string', required: true },
+            coach: {
+              dataType: 'nestedObjectLiteral',
+              nestedProperties: {
+                nationality: { dataType: 'string', required: true },
+                name: { dataType: 'string', required: true },
+                id: { dataType: 'double', required: true },
+              },
+              required: true,
+            },
+            crest: { dataType: 'string', required: true },
+            tla: { dataType: 'string', required: true },
+            shortName: { dataType: 'string', required: true },
+            name: { dataType: 'string', required: true },
+            id: { dataType: 'double', required: true },
+          },
+          required: true,
+        },
+        lastUpdated: { dataType: 'string', required: true },
+        group: { dataType: 'enum', enums: [null], required: true },
+        stage: { dataType: 'string', required: true },
+        matchday: { dataType: 'double', required: true },
+        venue: { dataType: 'string', required: true },
+        attendance: { dataType: 'double', required: true },
+        injuryTime: { dataType: 'double', required: true },
+        minute: { dataType: 'double', required: true },
+        status: { dataType: 'string', required: true },
+        utcDate: { dataType: 'string', required: true },
+        id: { dataType: 'double', required: true },
+        season: {
+          dataType: 'nestedObjectLiteral',
+          nestedProperties: {
+            stages: {
+              dataType: 'array',
+              array: { dataType: 'string' },
+              required: true,
+            },
+            winner: { dataType: 'enum', enums: [null], required: true },
+            currentMatchday: { dataType: 'double', required: true },
+            endDate: { dataType: 'string', required: true },
+            startDate: { dataType: 'string', required: true },
+            id: { dataType: 'double', required: true },
+          },
+          required: true,
+        },
+        competition: {
+          dataType: 'nestedObjectLiteral',
+          nestedProperties: {
+            emblem: { dataType: 'string', required: true },
+            type: { dataType: 'string', required: true },
+            code: { dataType: 'string', required: true },
+            name: { dataType: 'string', required: true },
+            id: { dataType: 'double', required: true },
+          },
+          required: true,
+        },
+        area: {
+          dataType: 'nestedObjectLiteral',
+          nestedProperties: {
+            flag: { dataType: 'string', required: true },
+            code: { dataType: 'string', required: true },
+            name: { dataType: 'string', required: true },
+            id: { dataType: 'double', required: true },
+          },
+          required: true,
+        },
+      },
+      validators: {},
+    },
+  },
+  // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
   ForexCurrency: {
     dataType: 'refAlias',
     type: {
@@ -1104,6 +1559,208 @@ export function RegisterRoutes(app: Router) {
   );
   // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
   app.get(
+    '/api/football/competitions',
+    ...fetchMiddlewares<RequestHandler>(FootballController),
+    ...fetchMiddlewares<RequestHandler>(
+      FootballController.prototype.getCompetitions
+    ),
+
+    function FootballController_getCompetitions(
+      request: any,
+      response: any,
+      next: any
+    ) {
+      const args = {};
+
+      // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+      let validatedArgs: any[] = [];
+      try {
+        validatedArgs = getValidatedArgs(args, request, response);
+
+        const controller = new FootballController();
+
+        const promise = controller.getCompetitions.apply(
+          controller,
+          validatedArgs as any
+        );
+        promiseHandler(controller, promise, response, 200, next);
+      } catch (err) {
+        return next(err);
+      }
+    }
+  );
+  // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+  app.get(
+    '/api/football/competitions/:id',
+    ...fetchMiddlewares<RequestHandler>(FootballController),
+    ...fetchMiddlewares<RequestHandler>(
+      FootballController.prototype.getCompetition
+    ),
+
+    function FootballController_getCompetition(
+      request: any,
+      response: any,
+      next: any
+    ) {
+      const args = {
+        id: { in: 'path', name: 'id', required: true, dataType: 'string' },
+      };
+
+      // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+      let validatedArgs: any[] = [];
+      try {
+        validatedArgs = getValidatedArgs(args, request, response);
+
+        const controller = new FootballController();
+
+        const promise = controller.getCompetition.apply(
+          controller,
+          validatedArgs as any
+        );
+        promiseHandler(controller, promise, response, 200, next);
+      } catch (err) {
+        return next(err);
+      }
+    }
+  );
+  // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+  app.get(
+    '/api/football/competitions/:id/teams',
+    ...fetchMiddlewares<RequestHandler>(FootballController),
+    ...fetchMiddlewares<RequestHandler>(
+      FootballController.prototype.getTeamsByCompetition
+    ),
+
+    function FootballController_getTeamsByCompetition(
+      request: any,
+      response: any,
+      next: any
+    ) {
+      const args = {
+        id: { in: 'path', name: 'id', required: true, dataType: 'string' },
+      };
+
+      // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+      let validatedArgs: any[] = [];
+      try {
+        validatedArgs = getValidatedArgs(args, request, response);
+
+        const controller = new FootballController();
+
+        const promise = controller.getTeamsByCompetition.apply(
+          controller,
+          validatedArgs as any
+        );
+        promiseHandler(controller, promise, response, 200, next);
+      } catch (err) {
+        return next(err);
+      }
+    }
+  );
+  // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+  app.get(
+    '/api/football/teams',
+    ...fetchMiddlewares<RequestHandler>(FootballController),
+    ...fetchMiddlewares<RequestHandler>(FootballController.prototype.getTeams),
+
+    function FootballController_getTeams(
+      request: any,
+      response: any,
+      next: any
+    ) {
+      const args = {};
+
+      // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+      let validatedArgs: any[] = [];
+      try {
+        validatedArgs = getValidatedArgs(args, request, response);
+
+        const controller = new FootballController();
+
+        const promise = controller.getTeams.apply(
+          controller,
+          validatedArgs as any
+        );
+        promiseHandler(controller, promise, response, 200, next);
+      } catch (err) {
+        return next(err);
+      }
+    }
+  );
+  // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+  app.get(
+    '/api/football/teams/:id',
+    ...fetchMiddlewares<RequestHandler>(FootballController),
+    ...fetchMiddlewares<RequestHandler>(FootballController.prototype.getTeam),
+
+    function FootballController_getTeam(
+      request: any,
+      response: any,
+      next: any
+    ) {
+      const args = {
+        id: { in: 'path', name: 'id', required: true, dataType: 'string' },
+      };
+
+      // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+      let validatedArgs: any[] = [];
+      try {
+        validatedArgs = getValidatedArgs(args, request, response);
+
+        const controller = new FootballController();
+
+        const promise = controller.getTeam.apply(
+          controller,
+          validatedArgs as any
+        );
+        promiseHandler(controller, promise, response, 200, next);
+      } catch (err) {
+        return next(err);
+      }
+    }
+  );
+  // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+  app.get(
+    '/api/football/teams/:id/matches',
+    ...fetchMiddlewares<RequestHandler>(FootballController),
+    ...fetchMiddlewares<RequestHandler>(
+      FootballController.prototype.getMatchesByTeam
+    ),
+
+    function FootballController_getMatchesByTeam(
+      request: any,
+      response: any,
+      next: any
+    ) {
+      const args = {
+        id: { in: 'path', name: 'id', required: true, dataType: 'string' },
+      };
+
+      // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+      let validatedArgs: any[] = [];
+      try {
+        validatedArgs = getValidatedArgs(args, request, response);
+
+        const controller = new FootballController();
+
+        const promise = controller.getMatchesByTeam.apply(
+          controller,
+          validatedArgs as any
+        );
+        promiseHandler(controller, promise, response, 200, next);
+      } catch (err) {
+        return next(err);
+      }
+    }
+  );
+  // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+  app.get(
     '/api/forex/currencies',
     ...fetchMiddlewares<RequestHandler>(ForexController),
     ...fetchMiddlewares<RequestHandler>(
@@ -1358,9 +2015,13 @@ export function RegisterRoutes(app: Router) {
   app.get(
     '/api/stock',
     ...fetchMiddlewares<RequestHandler>(StockController),
-    ...fetchMiddlewares<RequestHandler>(StockController.prototype.get),
+    ...fetchMiddlewares<RequestHandler>(StockController.prototype.getCompanies),
 
-    function StockController_get(request: any, response: any, next: any) {
+    function StockController_getCompanies(
+      request: any,
+      response: any,
+      next: any
+    ) {
       const args = {};
 
       // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
@@ -1371,7 +2032,10 @@ export function RegisterRoutes(app: Router) {
 
         const controller = new StockController();
 
-        const promise = controller.get.apply(controller, validatedArgs as any);
+        const promise = controller.getCompanies.apply(
+          controller,
+          validatedArgs as any
+        );
         promiseHandler(controller, promise, response, 200, next);
       } catch (err) {
         return next(err);

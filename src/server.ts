@@ -1,7 +1,17 @@
+import {
+  ApolloServerPluginDrainHttpServer,
+  ApolloServerPluginLandingPageGraphQLPlayground,
+  ApolloServerPluginLandingPageProductionDefault,
+} from 'apollo-server-core';
+import { ApolloServer } from 'apollo-server-express';
+import graphqlDepthLimit from 'graphql-depth-limit';
 import http from 'http';
 import { HttpError } from 'http-errors';
 import app from './app';
 import logger from './common/libs/logger';
+import { resolvers, typeDefs } from './graphql';
+
+const NODE_ENV = process.env.NODE_ENV || 'development';
 
 const normalizePort = (val: string): string | number | boolean => {
   const portOrPipe = parseInt(val, 10);
@@ -19,12 +29,28 @@ const normalizePort = (val: string): string | number | boolean => {
   return false;
 };
 
-const port = normalizePort(process.env.PORT || '8080');
-app.set('port', port);
-
-const httpServer = http.createServer(app);
-
 const main = async () => {
+  // Port
+  const port = normalizePort(process.env.PORT || '8080');
+  app.set('port', port);
+  const httpServer = http.createServer(app);
+  // Apollo Server
+  const landingPage =
+    NODE_ENV === 'production'
+      ? ApolloServerPluginLandingPageProductionDefault()
+      : ApolloServerPluginLandingPageGraphQLPlayground();
+  const apolloServer = new ApolloServer({
+    typeDefs,
+    resolvers,
+    cache: 'bounded',
+    csrfPrevention: true,
+    validationRules: [graphqlDepthLimit(10)],
+    introspection: NODE_ENV !== 'production',
+    plugins: [landingPage, ApolloServerPluginDrainHttpServer({ httpServer })],
+  });
+  await apolloServer.start();
+  apolloServer.applyMiddleware({ app });
+  // HTTP Server
   httpServer.listen(port);
   httpServer.on('listening', () => {
     const addr = httpServer.address();

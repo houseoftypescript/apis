@@ -1342,6 +1342,820 @@ components:
         - 'capitalInfo'
       type: 'object'
       additionalProperties: false
+    Competition:
+      properties:
+        lastUpdated:
+          type: 'string'
+        numberOfAvailableSeasons:
+          type: 'number'
+          format: 'double'
+        currentSeason:
+          properties:
+            winner:
+              properties:
+                lastUpdated:
+                  type: 'string'
+                venue:
+                  type: 'string'
+                clubColors:
+                  type: 'string'
+                founded:
+                  type: 'number'
+                  format: 'double'
+                website:
+                  type: 'string'
+                address:
+                  type: 'string'
+                crest:
+                  type: 'string'
+                tla:
+                  type: 'string'
+                shortName:
+                  type: 'string'
+                name:
+                  type: 'string'
+                id:
+                  type: 'number'
+                  format: 'double'
+              required:
+                - 'lastUpdated'
+                - 'venue'
+                - 'clubColors'
+                - 'founded'
+                - 'website'
+                - 'address'
+                - 'crest'
+                - 'tla'
+                - 'shortName'
+                - 'name'
+                - 'id'
+              type: 'object'
+            currentMatchday:
+              type: 'number'
+              format: 'double'
+            endDate:
+              type: 'string'
+            startDate:
+              type: 'string'
+            id:
+              type: 'number'
+              format: 'double'
+          required:
+            - 'winner'
+            - 'currentMatchday'
+            - 'endDate'
+            - 'startDate'
+            - 'id'
+          type: 'object'
+        plan:
+          type: 'string'
+        emblem:
+          type: 'string'
+        type:
+          type: 'string'
+        code:
+          type: 'string'
+        name:
+          type: 'string'
+        area:
+          properties:
+            flag:
+              type: 'string'
+            code:
+              type: 'string'
+            name:
+              type: 'string'
+            id:
+              type: 'number'
+              format: 'double'
+          required:
+            - 'flag'
+            - 'code'
+            - 'name'
+            - 'id'
+          type: 'object'
+        id:
+          type: 'number'
+          format: 'double'
+      required:
+        - 'lastUpdated'
+        - 'numberOfAvailableSeasons'
+        - 'currentSeason'
+        - 'plan'
+        - 'emblem'
+        - 'type'
+        - 'code'
+        - 'name'
+        - 'area'
+        - 'id'
+      type: 'object'
+    Team:
+      properties:
+        lastUpdated:
+          type: 'string'
+        venue:
+          type: 'string'
+        clubColors:
+          type: 'string'
+        founded:
+          type: 'number'
+          format: 'double'
+        website:
+          type: 'string'
+        address:
+          type: 'string'
+        crest:
+          type: 'string'
+        tla:
+          type: 'string'
+        shortName:
+          type: 'string'
+        name:
+          type: 'string'
+        id:
+          type: 'number'
+          format: 'double'
+      required:
+        - 'lastUpdated'
+        - 'venue'
+        - 'clubColors'
+        - 'founded'
+        - 'website'
+        - 'address'
+        - 'crest'
+        - 'tla'
+        - 'shortName'
+        - 'name'
+        - 'id'
+      type: 'object'
+    Match:
+      properties:
+        referees:
+          items:
+            properties:
+              nationality:
+                type: 'string'
+              type:
+                type: 'string'
+              name:
+                type: 'string'
+              id:
+                type: 'number'
+                format: 'double'
+            required:
+              - 'nationality'
+              - 'type'
+              - 'name'
+              - 'id'
+            type: 'object'
+          type: 'array'
+        odds:
+          properties:
+            awayWin:
+              type: 'number'
+              format: 'double'
+            draw:
+              type: 'number'
+              format: 'double'
+            homeWin:
+              type: 'number'
+              format: 'double'
+          required:
+            - 'awayWin'
+            - 'draw'
+            - 'homeWin'
+          type: 'object'
+        substitutions:
+          items:
+            properties:
+              playerIn:
+                properties:
+                  name:
+                    type: 'string'
+                  id:
+                    type: 'number'
+                    format: 'double'
+                required:
+                  - 'name'
+                  - 'id'
+                type: 'object'
+              playerOut:
+                properties:
+                  name:
+                    type: 'string'
+                  id:
+                    type: 'number'
+                    format: 'double'
+                required:
+                  - 'name'
+                  - 'id'
+                type: 'object'
+              team:
+                properties:
+                  name:
+                    type: 'string'
+                  id:
+                    type: 'number'
+                    format: 'double'
+                required:
+                  - 'name'
+                  - 'id'
+                type: 'object'
+              minute:
+                type: 'number'
+                format: 'double'
+            required:
+              - 'playerIn'
+              - 'playerOut'
+              - 'team'
+              - 'minute'
+            type: 'object'
+          type: 'array'
+        bookings:
+          items:
+            properties:
+              card:
+                type: 'string'
+              player:
+                properties:
+                  name:
+                    type: 'string'
+                  id:
+                    type: 'number'
+                    format: 'double'
+                required:
+                  - 'name'
+                  - 'id'
+                type: 'object'
+              team:
+                properties:
+                  name:
+                    type: 'string'
+                  id:
+                    type: 'number'
+                    format: 'double'
+                required:
+                  - 'name'
+                  - 'id'
+                type: 'object'
+              minute:
+                type: 'number'
+                format: 'double'
+            required:
+              - 'card'
+              - 'player'
+              - 'team'
+              - 'minute'
+            type: 'object'
+          type: 'array'
+        penalties:
+          items:
+            properties:
+              scored:
+                type: 'boolean'
+              team:
+                properties:
+                  name:
+                    type: 'string'
+                  id:
+                    type: 'number'
+                    format: 'double'
+                required:
+                  - 'name'
+                  - 'id'
+                type: 'object'
+              player:
+                properties:
+                  name:
+                    type: 'string'
+                  id:
+                    type: 'number'
+                    format: 'double'
+                required:
+                  - 'name'
+                  - 'id'
+                type: 'object'
+            required:
+              - 'scored'
+              - 'team'
+              - 'player'
+            type: 'object'
+          type: 'array'
+        goals:
+          items:
+            properties:
+              score:
+                properties:
+                  away:
+                    type: 'number'
+                    format: 'double'
+                  home:
+                    type: 'number'
+                    format: 'double'
+                required:
+                  - 'away'
+                  - 'home'
+                type: 'object'
+              assist:
+                properties:
+                  name:
+                    type: 'string'
+                  id:
+                    type: 'number'
+                    format: 'double'
+                required:
+                  - 'name'
+                  - 'id'
+                type: 'object'
+                nullable: true
+              scorer:
+                properties:
+                  name:
+                    type: 'string'
+                  id:
+                    type: 'number'
+                    format: 'double'
+                required:
+                  - 'name'
+                  - 'id'
+                type: 'object'
+              team:
+                properties:
+                  name:
+                    type: 'string'
+                  id:
+                    type: 'number'
+                    format: 'double'
+                required:
+                  - 'name'
+                  - 'id'
+                type: 'object'
+              type:
+                type: 'string'
+              injuryTime:
+                type: 'number'
+                format: 'double'
+              minute:
+                type: 'number'
+                format: 'double'
+            required:
+              - 'score'
+              - 'assist'
+              - 'scorer'
+              - 'team'
+              - 'type'
+              - 'injuryTime'
+              - 'minute'
+            type: 'object'
+          type: 'array'
+        score:
+          properties:
+            halfTime:
+              properties:
+                away:
+                  type: 'number'
+                  format: 'double'
+                home:
+                  type: 'number'
+                  format: 'double'
+              required:
+                - 'away'
+                - 'home'
+              type: 'object'
+            fullTime:
+              properties:
+                away:
+                  type: 'number'
+                  format: 'double'
+                home:
+                  type: 'number'
+                  format: 'double'
+              required:
+                - 'away'
+                - 'home'
+              type: 'object'
+            duration:
+              type: 'string'
+            winner:
+              type: 'string'
+          required:
+            - 'halfTime'
+            - 'fullTime'
+            - 'duration'
+            - 'winner'
+          type: 'object'
+        awayTeam:
+          properties:
+            statistics:
+              properties:
+                red_cards:
+                  type: 'number'
+                  format: 'double'
+                yellow_red_cards:
+                  type: 'number'
+                  format: 'double'
+                yellow_cards:
+                  type: 'number'
+                  format: 'double'
+                shots_off_goal:
+                  type: 'number'
+                  format: 'double'
+                shots_on_goal:
+                  type: 'number'
+                  format: 'double'
+                shots:
+                  type: 'number'
+                  format: 'double'
+                throw_ins:
+                  type: 'number'
+                  format: 'double'
+                saves:
+                  type: 'number'
+                  format: 'double'
+                ball_possession:
+                  type: 'number'
+                  format: 'double'
+                fouls:
+                  type: 'number'
+                  format: 'double'
+                offsides:
+                  type: 'number'
+                  format: 'double'
+                goal_kicks:
+                  type: 'number'
+                  format: 'double'
+                free_kicks:
+                  type: 'number'
+                  format: 'double'
+                corner_kicks:
+                  type: 'number'
+                  format: 'double'
+              required:
+                - 'red_cards'
+                - 'yellow_red_cards'
+                - 'yellow_cards'
+                - 'shots_off_goal'
+                - 'shots_on_goal'
+                - 'shots'
+                - 'throw_ins'
+                - 'saves'
+                - 'ball_possession'
+                - 'fouls'
+                - 'offsides'
+                - 'goal_kicks'
+                - 'free_kicks'
+                - 'corner_kicks'
+              type: 'object'
+            bench:
+              items:
+                properties:
+                  shirtNumber:
+                    type: 'number'
+                    format: 'double'
+                  position:
+                    type: 'string'
+                  name:
+                    type: 'string'
+                  id:
+                    type: 'number'
+                    format: 'double'
+                required:
+                  - 'shirtNumber'
+                  - 'position'
+                  - 'name'
+                  - 'id'
+                type: 'object'
+              type: 'array'
+            lineup:
+              items:
+                properties:
+                  shirtNumber:
+                    type: 'number'
+                    format: 'double'
+                  position:
+                    type: 'string'
+                  name:
+                    type: 'string'
+                  id:
+                    type: 'number'
+                    format: 'double'
+                required:
+                  - 'shirtNumber'
+                  - 'position'
+                  - 'name'
+                  - 'id'
+                type: 'object'
+              type: 'array'
+            formation:
+              type: 'string'
+            leagueRank:
+              type: 'number'
+              enum:
+                - null
+              nullable: true
+            coach:
+              properties:
+                nationality:
+                  type: 'string'
+                name:
+                  type: 'string'
+                id:
+                  type: 'number'
+                  format: 'double'
+              required:
+                - 'nationality'
+                - 'name'
+                - 'id'
+              type: 'object'
+            crest:
+              type: 'string'
+            tla:
+              type: 'string'
+            shortName:
+              type: 'string'
+            name:
+              type: 'string'
+            id:
+              type: 'number'
+              format: 'double'
+          required:
+            - 'statistics'
+            - 'bench'
+            - 'lineup'
+            - 'formation'
+            - 'leagueRank'
+            - 'coach'
+            - 'crest'
+            - 'tla'
+            - 'shortName'
+            - 'name'
+            - 'id'
+          type: 'object'
+        homeTeam:
+          properties:
+            statistics:
+              properties:
+                red_cards:
+                  type: 'number'
+                  format: 'double'
+                yellow_red_cards:
+                  type: 'number'
+                  format: 'double'
+                yellow_cards:
+                  type: 'number'
+                  format: 'double'
+                shots_off_goal:
+                  type: 'number'
+                  format: 'double'
+                shots_on_goal:
+                  type: 'number'
+                  format: 'double'
+                shots:
+                  type: 'number'
+                  format: 'double'
+                throw_ins:
+                  type: 'number'
+                  format: 'double'
+                saves:
+                  type: 'number'
+                  format: 'double'
+                ball_possession:
+                  type: 'number'
+                  format: 'double'
+                fouls:
+                  type: 'number'
+                  format: 'double'
+                offsides:
+                  type: 'number'
+                  format: 'double'
+                goal_kicks:
+                  type: 'number'
+                  format: 'double'
+                free_kicks:
+                  type: 'number'
+                  format: 'double'
+                corner_kicks:
+                  type: 'number'
+                  format: 'double'
+              required:
+                - 'red_cards'
+                - 'yellow_red_cards'
+                - 'yellow_cards'
+                - 'shots_off_goal'
+                - 'shots_on_goal'
+                - 'shots'
+                - 'throw_ins'
+                - 'saves'
+                - 'ball_possession'
+                - 'fouls'
+                - 'offsides'
+                - 'goal_kicks'
+                - 'free_kicks'
+                - 'corner_kicks'
+              type: 'object'
+            bench:
+              items:
+                properties:
+                  shirtNumber:
+                    type: 'number'
+                    format: 'double'
+                  position:
+                    type: 'string'
+                  name:
+                    type: 'string'
+                  id:
+                    type: 'number'
+                    format: 'double'
+                required:
+                  - 'shirtNumber'
+                  - 'position'
+                  - 'name'
+                  - 'id'
+                type: 'object'
+              type: 'array'
+            lineup:
+              items:
+                properties:
+                  shirtNumber:
+                    type: 'number'
+                    format: 'double'
+                  position:
+                    type: 'string'
+                  name:
+                    type: 'string'
+                  id:
+                    type: 'number'
+                    format: 'double'
+                required:
+                  - 'shirtNumber'
+                  - 'position'
+                  - 'name'
+                  - 'id'
+                type: 'object'
+              type: 'array'
+            formation:
+              type: 'string'
+            leagueRank:
+              type: 'string'
+            coach:
+              properties:
+                nationality:
+                  type: 'string'
+                name:
+                  type: 'string'
+                id:
+                  type: 'number'
+                  format: 'double'
+              required:
+                - 'nationality'
+                - 'name'
+                - 'id'
+              type: 'object'
+            crest:
+              type: 'string'
+            tla:
+              type: 'string'
+            shortName:
+              type: 'string'
+            name:
+              type: 'string'
+            id:
+              type: 'number'
+              format: 'double'
+          required:
+            - 'statistics'
+            - 'bench'
+            - 'lineup'
+            - 'formation'
+            - 'leagueRank'
+            - 'coach'
+            - 'crest'
+            - 'tla'
+            - 'shortName'
+            - 'name'
+            - 'id'
+          type: 'object'
+        lastUpdated:
+          type: 'string'
+        group:
+          type: 'number'
+          enum:
+            - null
+          nullable: true
+        stage:
+          type: 'string'
+        matchday:
+          type: 'number'
+          format: 'double'
+        venue:
+          type: 'string'
+        attendance:
+          type: 'number'
+          format: 'double'
+        injuryTime:
+          type: 'number'
+          format: 'double'
+        minute:
+          type: 'number'
+          format: 'double'
+        status:
+          type: 'string'
+        utcDate:
+          type: 'string'
+        id:
+          type: 'number'
+          format: 'double'
+        season:
+          properties:
+            stages:
+              items:
+                type: 'string'
+              type: 'array'
+            winner:
+              type: 'number'
+              enum:
+                - null
+              nullable: true
+            currentMatchday:
+              type: 'number'
+              format: 'double'
+            endDate:
+              type: 'string'
+            startDate:
+              type: 'string'
+            id:
+              type: 'number'
+              format: 'double'
+          required:
+            - 'stages'
+            - 'winner'
+            - 'currentMatchday'
+            - 'endDate'
+            - 'startDate'
+            - 'id'
+          type: 'object'
+        competition:
+          properties:
+            emblem:
+              type: 'string'
+            type:
+              type: 'string'
+            code:
+              type: 'string'
+            name:
+              type: 'string'
+            id:
+              type: 'number'
+              format: 'double'
+          required:
+            - 'emblem'
+            - 'type'
+            - 'code'
+            - 'name'
+            - 'id'
+          type: 'object'
+        area:
+          properties:
+            flag:
+              type: 'string'
+            code:
+              type: 'string'
+            name:
+              type: 'string'
+            id:
+              type: 'number'
+              format: 'double'
+          required:
+            - 'flag'
+            - 'code'
+            - 'name'
+            - 'id'
+          type: 'object'
+      required:
+        - 'referees'
+        - 'odds'
+        - 'substitutions'
+        - 'bookings'
+        - 'penalties'
+        - 'goals'
+        - 'score'
+        - 'awayTeam'
+        - 'homeTeam'
+        - 'lastUpdated'
+        - 'group'
+        - 'stage'
+        - 'matchday'
+        - 'venue'
+        - 'attendance'
+        - 'injuryTime'
+        - 'minute'
+        - 'status'
+        - 'utcDate'
+        - 'id'
+        - 'season'
+        - 'competition'
+        - 'area'
+      type: 'object'
     ForexCurrency:
       properties:
         favourite:
@@ -1670,6 +2484,118 @@ paths:
         - 'Countries'
       security: []
       parameters: []
+  /api/football/competitions:
+    get:
+      operationId: 'GetCompetitions'
+      responses:
+        200:
+          description: 'Get Competitions'
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Competition'
+                type: 'array'
+      tags:
+        - 'Football'
+      security: []
+      parameters: []
+  /api/football/competitions/{id}:
+    get:
+      operationId: 'GetCompetition'
+      responses:
+        200:
+          description: 'Get Competition by ID'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Competition'
+      tags:
+        - 'Football'
+      security: []
+      parameters:
+        - in: 'path'
+          name: 'id'
+          required: true
+          schema:
+            type: 'string'
+  /api/football/competitions/{id}/teams:
+    get:
+      operationId: 'GetTeamsByCompetition'
+      responses:
+        200:
+          description: 'Get Competition by ID'
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Team'
+                type: 'array'
+      tags:
+        - 'Football'
+      security: []
+      parameters:
+        - in: 'path'
+          name: 'id'
+          required: true
+          schema:
+            type: 'string'
+  /api/football/teams:
+    get:
+      operationId: 'GetTeams'
+      responses:
+        200:
+          description: 'Get Teams'
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Team'
+                type: 'array'
+      tags:
+        - 'Football'
+      security: []
+      parameters: []
+  /api/football/teams/{id}:
+    get:
+      operationId: 'GetTeam'
+      responses:
+        200:
+          description: 'Get Teams'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Team'
+      tags:
+        - 'Football'
+      security: []
+      parameters:
+        - in: 'path'
+          name: 'id'
+          required: true
+          schema:
+            type: 'string'
+  /api/football/teams/{id}/matches:
+    get:
+      operationId: 'GetMatchesByTeam'
+      responses:
+        200:
+          description: 'Get Matches'
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Match'
+                type: 'array'
+      tags:
+        - 'Football'
+      security: []
+      parameters:
+        - in: 'path'
+          name: 'id'
+          required: true
+          schema:
+            type: 'string'
   /api/forex/currencies:
     get:
       operationId: 'GetCurrencies'
@@ -1864,19 +2790,10 @@ paths:
       parameters: []
   /api/stock:
     get:
-      operationId: 'Get'
+      operationId: 'GetCompanies'
       responses:
         200:
           description: 'Stock'
-          content:
-            application/json:
-              schema:
-                properties:
-                  status:
-                    type: 'string'
-                required:
-                  - 'status'
-                type: 'object'
       tags:
         - 'Stock'
       security: []

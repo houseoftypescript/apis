@@ -1,5 +1,5 @@
 {
-  "exec": "node -r tsconfig-paths/register -r ts-node/register ./src/server.ts",
+  "exec": "ts-node ./src/server.ts",
   "ext": "ts",
   "watch": ["node_modules", "src"],
   "ignore": ["src/routes.ts"]
