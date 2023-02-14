@@ -30,6 +30,8 @@ import { StockController } from './modules/stock/stock.controller';
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 import { TimeZonesController } from './modules/time-zones/time-zones.controller';
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+import { TwitterController } from './modules/twitter/twitter.controller';
+// WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 import { WeatherController } from './modules/weather/weather.controller';
 import type { RequestHandler, Router } from 'express';
 
@@ -1554,6 +1556,45 @@ const models: TsoaRoute.Models = {
     },
   },
   // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+  Trend: {
+    dataType: 'refAlias',
+    type: {
+      dataType: 'nestedObjectLiteral',
+      nestedProperties: {
+        tweet_volume: { dataType: 'double', required: true },
+        query: { dataType: 'string', required: true },
+        promoted_content: { dataType: 'boolean', required: true },
+        url: { dataType: 'string', required: true },
+        name: { dataType: 'string', required: true },
+      },
+      validators: {},
+    },
+  },
+  // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+  Place: {
+    dataType: 'refAlias',
+    type: {
+      dataType: 'nestedObjectLiteral',
+      nestedProperties: {
+        woeid: { dataType: 'double', required: true },
+        url: { dataType: 'string', required: true },
+        placeType: {
+          dataType: 'nestedObjectLiteral',
+          nestedProperties: {
+            name: { dataType: 'string', required: true },
+            code: { dataType: 'double', required: true },
+          },
+          required: true,
+        },
+        parentid: { dataType: 'double', required: true },
+        name: { dataType: 'string', required: true },
+        countryCode: { dataType: 'string', required: true },
+        country: { dataType: 'string', required: true },
+      },
+      validators: {},
+    },
+  },
+  // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
   Weather: {
     dataType: 'refAlias',
     type: {
@@ -2385,6 +2426,70 @@ export function RegisterRoutes(app: Router) {
         const controller = new TimeZonesController();
 
         const promise = controller.getTimeZone.apply(
+          controller,
+          validatedArgs as any
+        );
+        promiseHandler(controller, promise, response, 200, next);
+      } catch (err) {
+        return next(err);
+      }
+    }
+  );
+  // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+  app.get(
+    '/api/twitter/trends',
+    ...fetchMiddlewares<RequestHandler>(TwitterController),
+    ...fetchMiddlewares<RequestHandler>(TwitterController.prototype.getTrends),
+
+    function TwitterController_getTrends(
+      request: any,
+      response: any,
+      next: any
+    ) {
+      const args = {
+        id: { default: 1, in: 'query', name: 'id', dataType: 'double' },
+      };
+
+      // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+      let validatedArgs: any[] = [];
+      try {
+        validatedArgs = getValidatedArgs(args, request, response);
+
+        const controller = new TwitterController();
+
+        const promise = controller.getTrends.apply(
+          controller,
+          validatedArgs as any
+        );
+        promiseHandler(controller, promise, response, 200, next);
+      } catch (err) {
+        return next(err);
+      }
+    }
+  );
+  // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+  app.get(
+    '/api/twitter/places',
+    ...fetchMiddlewares<RequestHandler>(TwitterController),
+    ...fetchMiddlewares<RequestHandler>(TwitterController.prototype.getPlaces),
+
+    function TwitterController_getPlaces(
+      request: any,
+      response: any,
+      next: any
+    ) {
+      const args = {};
+
+      // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+      let validatedArgs: any[] = [];
+      try {
+        validatedArgs = getValidatedArgs(args, request, response);
+
+        const controller = new TwitterController();
+
+        const promise = controller.getPlaces.apply(
           controller,
           validatedArgs as any
         );

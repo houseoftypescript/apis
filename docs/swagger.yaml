@@ -2590,6 +2590,62 @@ components:
         - 'timezone'
       type: 'object'
       description: 'Model TimeZone'
+    Trend:
+      properties:
+        tweet_volume:
+          type: 'number'
+          format: 'double'
+        query:
+          type: 'string'
+        promoted_content:
+          type: 'boolean'
+        url:
+          type: 'string'
+        name:
+          type: 'string'
+      required:
+        - 'tweet_volume'
+        - 'query'
+        - 'promoted_content'
+        - 'url'
+        - 'name'
+      type: 'object'
+    Place:
+      properties:
+        woeid:
+          type: 'number'
+          format: 'double'
+        url:
+          type: 'string'
+        placeType:
+          properties:
+            name:
+              type: 'string'
+            code:
+              type: 'number'
+              format: 'double'
+          required:
+            - 'name'
+            - 'code'
+          type: 'object'
+        parentid:
+          type: 'number'
+          format: 'double'
+        name:
+          type: 'string'
+        countryCode:
+          type: 'string'
+        country:
+          type: 'string'
+      required:
+        - 'woeid'
+        - 'url'
+        - 'placeType'
+        - 'parentid'
+        - 'name'
+        - 'countryCode'
+        - 'country'
+      type: 'object'
     Weather:
       properties:
         minTemperature:
@@ -3159,6 +3215,45 @@ paths:
           required: true
           schema:
             type: 'string'
+  /api/twitter/trends:
+    get:
+      operationId: 'GetTrends'
+      responses:
+        200:
+          description: 'Get Trends'
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Trend'
+                type: 'array'
+      tags:
+        - 'Twitter'
+      security: []
+      parameters:
+        - in: 'query'
+          name: 'id'
+          required: false
+          schema:
+            default: 1
+            format: 'double'
+            type: 'number'
+  /api/twitter/places:
+    get:
+      operationId: 'GetPlaces'
+      responses:
+        200:
+          description: 'Get Places'
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Place'
+                type: 'array'
+      tags:
+        - 'Twitter'
+      security: []
+      parameters: []
   /api/weather:
     get:
       operationId: 'GetWeather'
