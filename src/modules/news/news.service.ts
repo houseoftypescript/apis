@@ -112,9 +112,8 @@ export const getHeadlines = async (
     logger.info(`getHeadlines key ${key}`);
     await redisClient.connect();
     // Fetch from Cache
-    const articlesString = await redisClient.get(key);
-    if (articlesString !== null) {
-      let cacheArticles: Article[] = JSON.parse(articlesString) as Article[];
+    let cacheArticles = await redisClient.get<Article[]>(key);
+    if (cacheArticles !== null) {
       cacheArticles = cacheArticles.slice(0, pageSize);
       return cacheArticles;
     }
@@ -133,7 +132,7 @@ export const getHeadlines = async (
     if (data.status !== 'ok') throw new Error('NEWS API ERROR');
     // Set to Cache
     const { articles = [] } = data;
-    await redisClient.set(key, JSON.stringify(articles), { EX: 60 * 60 });
+    await redisClient.set<Article[]>(key, articles, { EX: 60 * 60 });
     return articles;
   } catch (error) {
     logger.error(`getHeadlines Error ${error}`);

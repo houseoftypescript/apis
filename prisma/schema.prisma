@@ -39,3 +39,22 @@ model TimeZone {
   utcOffset    String @default("")
   rawOffset    Int    @default(0)
 }
+
+model State {
+  abbreviation String @id
+  name         String @default("")
+  capital      String @default("")
+  largest      String @default("")
+  region       String @default("")
+  division     String @default("")
+  year         Int    @default(0)
+  month        Int    @default(0)
+  date         Int    @default(0)
+  level        Level
+}
+
+enum Level {
+  STATE
+  TERRITORY
+  FEDERAL_DISTRICT
+}

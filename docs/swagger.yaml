@@ -6,6 +6,215 @@ components:
   requestBodies: {}
   responses: {}
   schemas:
+    Chamber:
+      type: 'string'
+      enum:
+        - 'house'
+        - 'senate'
+    CongressMember:
+      properties:
+        votes_against_party_pct:
+          type: 'number'
+          format: 'double'
+        votes_with_party_pct:
+          type: 'number'
+          format: 'double'
+        missed_votes_pct:
+          type: 'number'
+          format: 'double'
+        geoid:
+          type: 'string'
+        at_large:
+          type: 'boolean'
+          enum:
+            - false
+          nullable: false
+        district:
+          type: 'string'
+        state:
+          type: 'string'
+        fax:
+          type: 'string'
+        phone:
+          type: 'string'
+        office:
+          type: 'string'
+        ocd_id:
+          type: 'string'
+        last_updated:
+          type: 'string'
+        total_present:
+          type: 'number'
+          format: 'double'
+        missed_votes:
+          type: 'number'
+          format: 'double'
+        total_votes:
+          type: 'number'
+          format: 'double'
+        next_election:
+          type: 'string'
+        seniority:
+          type: 'string'
+        ideal_point:
+          type: 'string'
+        dw_nominate:
+          type: 'string'
+        cook_pvi:
+          type: 'string'
+        in_office:
+          type: 'boolean'
+        contact_form:
+          type: 'string'
+        rss_url:
+          type: 'string'
+        url:
+          type: 'string'
+        fec_candidate_id:
+          type: 'string'
+        google_entity_id:
+          type: 'string'
+        crp_id:
+          type: 'string'
+        icpsr_id:
+          type: 'string'
+        votesmart_id:
+          type: 'string'
+        cspan_id:
+          type: 'string'
+        govtrack_id:
+          type: 'string'
+        youtube_account:
+          type: 'string'
+        facebook_account:
+          type: 'string'
+        twitter_account:
+          type: 'string'
+        leadership_role:
+          type: 'string'
+        party:
+          type: 'string'
+        gender:
+          type: 'string'
+        date_of_birth:
+          type: 'string'
+        suffix:
+          type: 'string'
+        last_name:
+          type: 'string'
+        middle_name:
+          type: 'string'
+        first_name:
+          type: 'string'
+        api_uri:
+          type: 'string'
+        short_title:
+          type: 'string'
+        title:
+          type: 'string'
+        id:
+          type: 'string'
+      required:
+        - 'votes_against_party_pct'
+        - 'votes_with_party_pct'
+        - 'missed_votes_pct'
+        - 'geoid'
+        - 'at_large'
+        - 'district'
+        - 'state'
+        - 'fax'
+        - 'phone'
+        - 'office'
+        - 'ocd_id'
+        - 'last_updated'
+        - 'total_present'
+        - 'missed_votes'
+        - 'total_votes'
+        - 'next_election'
+        - 'seniority'
+        - 'ideal_point'
+        - 'dw_nominate'
+        - 'cook_pvi'
+        - 'in_office'
+        - 'contact_form'
+        - 'rss_url'
+        - 'url'
+        - 'fec_candidate_id'
+        - 'google_entity_id'
+        - 'crp_id'
+        - 'icpsr_id'
+        - 'votesmart_id'
+        - 'cspan_id'
+        - 'govtrack_id'
+        - 'youtube_account'
+        - 'facebook_account'
+        - 'twitter_account'
+        - 'leadership_role'
+        - 'party'
+        - 'gender'
+        - 'date_of_birth'
+        - 'suffix'
+        - 'last_name'
+        - 'middle_name'
+        - 'first_name'
+        - 'api_uri'
+        - 'short_title'
+        - 'title'
+        - 'id'
+      type: 'object'
+    CongressCommittee:
+      properties:
+        subcommittees:
+          items:
+            properties:
+              api_uri:
+                type: 'string'
+              name:
+                type: 'string'
+              id:
+                type: 'string'
+            required:
+              - 'api_uri'
+              - 'name'
+              - 'id'
+            type: 'object'
+          type: 'array'
+        ranking_member_id:
+          type: 'string'
+        chair_uri:
+          type: 'string'
+        chair_state:
+          type: 'string'
+        chair_party:
+          type: 'string'
+        chair_id:
+          type: 'string'
+        chair:
+          type: 'string'
+        api_uri:
+          type: 'string'
+        url:
+          type: 'string'
+        chamber:
+          type: 'string'
+        name:
+          type: 'string'
+        id:
+          type: 'string'
+      required:
+        - 'subcommittees'
+        - 'ranking_member_id'
+        - 'chair_uri'
+        - 'chair_state'
+        - 'chair_party'
+        - 'chair_id'
+        - 'chair'
+        - 'api_uri'
+        - 'url'
+        - 'chamber'
+        - 'name'
+        - 'id'
+      type: 'object'
     Isl:
       properties:
         official:
@@ -2468,6 +2677,89 @@ info:
     email: 'hieumdoan@gmail.com'
 openapi: '3.0.0'
 paths:
+  /api/congress:
+    get:
+      operationId: 'GetCongress'
+      responses:
+        200:
+          description: 'Get congress'
+          content:
+            application/json:
+              schema:
+                properties:
+                  chambers:
+                    items:
+                      $ref: '#/components/schemas/Chamber'
+                    type: 'array'
+                  congresses:
+                    items:
+                      type: 'number'
+                      format: 'double'
+                    type: 'array'
+                required:
+                  - 'chambers'
+                  - 'congresses'
+                type: 'object'
+      tags:
+        - 'Congress'
+      security: []
+      parameters: []
+  /api/congress/members:
+    get:
+      operationId: 'GetMembers'
+      responses:
+        200:
+          description: 'Get Members'
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/CongressMember'
+                type: 'array'
+      tags:
+        - 'Congress'
+      security: []
+      parameters:
+        - in: 'query'
+          name: 'chamber'
+          required: false
+          schema:
+            $ref: '#/components/schemas/Chamber'
+        - in: 'query'
+          name: 'congress'
+          required: false
+          schema:
+            default: 118
+            format: 'double'
+            type: 'number'
+  /api/congress/committees:
+    get:
+      operationId: 'GetCommittees'
+      responses:
+        200:
+          description: 'Get Members'
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/CongressCommittee'
+                type: 'array'
+      tags:
+        - 'Congress'
+      security: []
+      parameters:
+        - in: 'query'
+          name: 'chamber'
+          required: false
+          schema:
+            $ref: '#/components/schemas/Chamber'
+        - in: 'query'
+          name: 'congress'
+          required: false
+          schema:
+            default: 118
+            format: 'double'
+            type: 'number'
   /api/countries:
     get:
       operationId: 'GetCountries'

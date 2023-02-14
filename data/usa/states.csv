@@ -1,0 +1,57 @@
+"name",abbreviation,"capital","largest",region,division,courts_of_appeals_circuit,year,month,date,level
+"Alabama",AL,"Montgomery","Huntsville",South,East South Central,Eleventh Circuit,1819,12,14,state
+"Alaska",AK,"Juneau","Anchorage",West,"Pacific ",Ninth Circuit,1959,01,03,state
+"American Samoa",AS,"Pago Pago","Pago Pago",,,Ninth Circuit,1900,,,territory
+"Arizona",AZ,"Phoenix","Phoenix",West,Mountain,Ninth Circuit,1912,02,14,state
+"Arkansas",AR,"Little Rock","Little Rock",South,West South Central,Eighth Circuit,1836,06,15,state
+"California",CA,"Sacramento","Los Angeles",West,"Pacific ",Ninth Circuit,1850,09,09,state
+"Colorado",CO,"Denver","Denver",West,Mountain,Tenth Circuit,1876,08,01,state
+"Connecticut",CT,"Hartford","Bridgeport",Northeast,New England,Second Circuit,1788,01,09,state
+"Delaware",DE,"Dover","Wilmington",South,South Alantic,Third Circuit,1787,12,07,state
+"Florida",FL,"Tallahassee","Jacksonville",South,South Alantic,Eleventh Circuit,1845,03,03,state
+"Georgia",GA,"Atlanta","Atlanta",South,South Alantic,Eleventh Circuit,1788,01,02,state
+"Guam",GU,"Hagåtña","Hagåtña",,,Ninth Circuit,1899,,,territory
+"Hawaii",HI,"Honolulu","Honolulu",West,"Pacific ",Ninth Circuit,1959,08,21,state
+"Idaho",ID,"Boise","Boise",West,Mountain,Ninth Circuit,1890,07,03,state
+"Illinois",IL,"Springfield","Chicago",Midwest,East North Central,Seventh Circuit,1818,12,03,state
+"Indiana",IN,"Indianapolis","Indianapolis",Midwest,East North Central,Seventh Circuit,1816,12,11,state
+"Iowa",IA,"Des Moines","Des Moines",Midwest,West North Central,Eighth Circuit,1846,12,28,state
+"Kansas",KS,"Topeka","Wichita",Midwest,West North Central,Tenth Circuit,1861,01,29,state
+"Kentucky",KY,"Frankfort","Louisville",South,East South Central,Sixth Circuit,1792,06,01,state
+"Louisiana",LA,"Baton Rouge","New Orleans",South,West South Central,Fifth Circuit,1812,04,30,state
+"Maine",ME,"Augusta","Portland",Northeast,New England,First Circuit,1820,03,15,state
+"Maryland",MD,"Annapolis","Baltimore",South,South Alantic,Fourth Circuit,1788,04,28,state
+"Massachusetts",MA,"Boston","Boston",Northeast,New England,First Circuit,1788,02,06,state
+"Michigan",MI,"Lansing","Detroit",Midwest,East North Central,Sixth Circuit,1837,01,26,state
+"Minnesota",MN,"St. Paul","Minneapolis",Midwest,West North Central,Eighth Circuit,1858,05,11,state
+"Mississippi",MS,"Jackson","Jackson",South,East South Central,Fifth Circuit,1817,12,10,state
+"Missouri",MO,"Jefferson City","Kansas City",Midwest,West North Central,Eighth Circuit,1821,08,10,state
+"Montana",MT,"Helena","Billings",West,Mountain,Ninth Circuit,1889,11,08,state
+"Nebraska",NE,"Lincoln","Omaha",Midwest,West North Central,Eighth Circuit,1867,03,01,state
+"Nevada",NV,"Carson City","Las Vegas",West,Mountain,Ninth Circuit,1864,10,31,state
+"New Hampshire",NH,"Concord","Manchester",Northeast,New England,First Circuit,1788,06,21,state
+"New Jersey",NJ,"Trenton","Newark",Northeast,Middle Atlantic,Third Circuit,1787,12,18,state
+"New Mexico",NM,"Santa Fe","Albuquerque",West,Mountain,Tenth Circuit,1912,01,06,state
+"New York",NY,"Albany","New York City",Northeast,Middle Atlantic,Second Circuit,1788,07,26,state
+"North Carolina",NC,"Raleigh","Charlotte",South,South Alantic,Fourth Circuit,1789,11,21,state
+"North Dakota",ND,"Bismarck","Fargo",Midwest,West North Central,Eighth Circuit,1889,11,02,state
+"Northern Mariana Islands",MP,"Saipan","Saipan",,,Ninth Circuit,1986,,,territory
+"Ohio",OH,"Columbus","Columbus",Midwest,East North Central,Sixth Circuit,1803,03,01,state
+"Oklahoma",OK,"Oklahoma City","Oklahoma City",South,West South Central,Tenth Circuit,1907,11,16,state
+"Oregon",OR,"Salem","Portland",West,"Pacific ",Ninth Circuit,1859,02,14,state
+"Pennsylvania",PA,"Harrisburg","Philadelphia",Northeast,Middle Atlantic,Third Circuit,1787,12,12,state
+"Puerto Rico",PR,"San Juan","San Juan",,,First Circuit,1899,,,territory
+"Rhode Island",RI,"Providence","Providence",Northeast,New England,First Circuit,1790,05,29,state
+"South Carolina",SC,"Columbia","Charleston",South,South Alantic,Fourth Circuit,1788,05,23,state
+"South Dakota",SD,"Pierre","Sioux Falls",Midwest,West North Central,Eighth Circuit,1889,11,02,state
+"Tennessee",TN,"Nashville","Nashville",South,East South Central,Sixth Circuit,1796,06,01,state
+"Texas",TX,"Austin","Houston",South,West South Central,Fifth Circuit,1845,12,29,state
+"U.S. Virgin Islands",VI,"Charlotte Amalie","Charlotte Amalie",,,Third Circuit,1917,,,territory
+"Utah",UT,"Salt Lake City","Salt Lake City",West,Mountain,Tenth Circuit,1896,01,04,state
+"Vermont",VT,"Montpelier","Burlington",Northeast,New England,Second Circuit,1791,03,04,state
+"Virginia",VA,"Richmond","Virginia Beach",South,South Alantic,Fourth Circuit,1788,06,25,state
+"Washington",WA,"Olympia","Seattle",West,"Pacific ",Ninth Circuit,1889,11,11,state
+"Washington, D.C.",DC,"Washington, D.C.","Washington, D.C.",South,South Alantic,District of Columbia Circuit,1790,07,16,federal district
+"West Virginia",WV,"Charleston","Charleston",South,South Alantic,Fourth Circuit,1863,06,20,state
+"Wisconsin",WI,"Madison","Milwaukee",Midwest,East North Central,Seventh Circuit,1848,05,29,state
+"Wyoming",WY,"Cheyenne","Cheyenne",West,Mountain,Tenth Circuit,1890,07,10,state

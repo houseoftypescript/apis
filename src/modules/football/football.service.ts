@@ -15,11 +15,8 @@ export const getCompetitions = async (): Promise<Competition[]> => {
     logger.info(`getCompetitions key ${key}`);
     await redisClient.connect();
     // Fetch Data from Cache
-    const competitionsString = await redisClient.get(key);
-    if (competitionsString !== null) {
-      const cacheCompetitions: Competition[] = JSON.parse(
-        competitionsString
-      ) as Competition[];
+    const cacheCompetitions = await redisClient.get<Competition[]>(key);
+    if (cacheCompetitions !== null) {
       return cacheCompetitions;
     }
     // Fetch Data from API
@@ -29,7 +26,7 @@ export const getCompetitions = async (): Promise<Competition[]> => {
       competitions: Competition[];
     }>(url, { headers });
     // Set Data to Cache
-    await redisClient.set(key, JSON.stringify(competitions), { EX: 60 * 60 });
+    await redisClient.set<Competition[]>(key, competitions, { EX: 60 * 60 });
     return competitions;
   } catch (error) {
     logger.error(`getCompetitions Error: ${error}`);
@@ -46,18 +43,15 @@ export const getCompetition = async (id: string): Promise<Competition> => {
     logger.info(`getCompetition key ${key}`);
     await redisClient.connect();
     // Fetch Data from Cache
-    const competitionString = await redisClient.get(key);
-    if (competitionString !== null) {
-      const cacheCompetition: Competition = JSON.parse(
-        competitionString
-      ) as Competition;
+    const cacheCompetition = await redisClient.get<Competition>(key);
+    if (cacheCompetition !== null) {
       return cacheCompetition;
     }
     // Fetch Data from API
     const url = `${BASE_URL}/competitions/${id}`;
     const competition = await get<Competition>(url, { headers });
     // Set Data to Cache
-    await redisClient.set(key, JSON.stringify(competition), { EX: 60 * 60 });
+    await redisClient.set<Competition>(key, competition, { EX: 60 * 60 });
     return competition;
   } catch (error) {
     logger.error(`getCompetition Error: ${error}`);
@@ -103,9 +97,8 @@ export const getMatchesByTeam = async (id: string): Promise<Match[]> => {
     logger.info(`getCompetition key ${key}`);
     await redisClient.connect();
     // Fetch Data from Cache
-    const matchesString = await redisClient.get(key);
-    if (matchesString !== null) {
-      const cacheMatches: Match[] = JSON.parse(matchesString) as Match[];
+    const cacheMatches = await redisClient.get<Match[]>(key);
+    if (cacheMatches !== null) {
       return cacheMatches;
     }
     // Fetch Data from API
@@ -114,7 +107,7 @@ export const getMatchesByTeam = async (id: string): Promise<Match[]> => {
       headers,
     });
     // Set Data to Cache
-    await redisClient.set(key, JSON.stringify(matches), { EX: 60 * 60 });
+    await redisClient.set<Match[]>(key, matches, { EX: 60 * 60 });
     return matches;
   } catch (error) {
     logger.error(`getCompetition Error: ${error}`);
