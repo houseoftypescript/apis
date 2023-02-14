@@ -3252,6 +3252,26 @@
         "type": "object",
         "description": "Model ForexRate"
       },
+      "Record_string.number_": {
+        "properties": {},
+        "type": "object",
+        "description": "Construct a type with a set of properties K of type T"
+      },
+      "TrendsByCountry": {
+        "properties": {
+          "trends": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "country": {
+            "type": "string"
+          }
+        },
+        "required": ["trends", "country"],
+        "type": "object"
+      },
       "Article": {
         "properties": {
           "content": {
@@ -3436,21 +3456,6 @@
         ],
         "type": "object",
         "description": "Model NewsSource"
-      },
-      "GoogleTrendsByCountry": {
-        "properties": {
-          "trends": {
-            "items": {
-              "type": "string"
-            },
-            "type": "array"
-          },
-          "country": {
-            "type": "string"
-          }
-        },
-        "required": ["trends", "country"],
-        "type": "object"
       },
       "TimeZone": {
         "properties": {
@@ -3937,6 +3942,71 @@
         "parameters": []
       }
     },
+    "/api/google/trends": {
+      "get": {
+        "operationId": "GetGoogleTrends",
+        "responses": {
+          "200": {
+            "description": "Get Google Trends",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "trendsByCountries": {
+                      "items": {
+                        "$ref": "#/components/schemas/TrendsByCountry"
+                      },
+                      "type": "array"
+                    },
+                    "trendsByNumber": {
+                      "$ref": "#/components/schemas/Record_string.number_"
+                    }
+                  },
+                  "required": ["trendsByCountries", "trendsByNumber"],
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Google"],
+        "security": [],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "country",
+            "required": false,
+            "schema": {
+              "default": "",
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/api/google/trends/countries": {
+      "get": {
+        "operationId": "GetGoogleTrendsCoutries",
+        "responses": {
+          "200": {
+            "description": "Get Google Trends",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "type": "string"
+                  },
+                  "type": "array"
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Google"],
+        "security": [],
+        "parameters": []
+      }
+    },
     "/api/health": {
       "get": {
         "operationId": "Get",
@@ -4138,62 +4208,6 @@
                 "schema": {
                   "items": {
                     "$ref": "#/components/schemas/NewsSource"
-                  },
-                  "type": "array"
-                }
-              }
-            }
-          }
-        },
-        "tags": ["News"],
-        "security": [],
-        "parameters": []
-      }
-    },
-    "/api/news/google-trends": {
-      "get": {
-        "operationId": "GetGoogleTrends",
-        "responses": {
-          "200": {
-            "description": "Get Google Trends",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "items": {
-                    "$ref": "#/components/schemas/GoogleTrendsByCountry"
-                  },
-                  "type": "array"
-                }
-              }
-            }
-          }
-        },
-        "tags": ["News"],
-        "security": [],
-        "parameters": [
-          {
-            "in": "query",
-            "name": "country",
-            "required": false,
-            "schema": {
-              "default": "",
-              "type": "string"
-            }
-          }
-        ]
-      }
-    },
-    "/api/news/google-trends/countries": {
-      "get": {
-        "operationId": "GetGoogleTrendsCoutries",
-        "responses": {
-          "200": {
-            "description": "Get Google Trends",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "items": {
-                    "type": "string"
                   },
                   "type": "array"
                 }

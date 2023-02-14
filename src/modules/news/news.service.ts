@@ -1,5 +1,6 @@
 import { NewsSource, Prisma } from '@prisma/client';
 import prismaClient from '../../common/clients/prisma';
+import redisClient from '../../common/clients/redis';
 import environments from '../../common/environments';
 import { get } from '../../common/libs/axios';
 import logger from '../../common/libs/logger';
@@ -8,13 +9,11 @@ import {
   Article,
   ArticlesResponse,
   Category,
-  GoogleTrendsByCountry,
   Language,
   SearchIn,
   SortBy,
   SourcesResponse,
 } from './news.types';
-import redisClient from '../../common/clients/redis';
 
 const NEWS_BASE_URL = 'https://newsapi.org/v2';
 
@@ -188,29 +187,4 @@ export const syncSources = async (): Promise<SyncResponse> => {
     await prismaClient.$disconnect();
     logger.info('PostgreSQL is disconnected');
   }
-};
-
-export const getGoogleTrends = async (
-  country: string
-): Promise<GoogleTrendsByCountry[]> => {
-  const url =
-    'https://trends.google.com/trends/hottrends/visualize/internal/data';
-  const data = await get<Record<string, string[]>>(url);
-  const keys: string[] = Object.keys(data);
-  return keys
-    .map((key) => {
-      const country = key.split('_').join(' ');
-      const trends = (data[key] || []).sort();
-      return { country, trends };
-    })
-    .filter(({ country: c }) => (country === '' ? true : c === country))
-    .sort((a, b) => (a.country > b.country ? 1 : -1));
-};
-
-export const getGoogleTrendsCoutries = async (): Promise<string[]> => {
-  const url =
-    'https://trends.google.com/trends/hottrends/visualize/internal/data';
-  const data = await get<Record<string, string[]>>(url);
-  const keys: string[] = Object.keys(data);
-  return keys.map((key) => key.split('_').join(' ')).sort();
 };

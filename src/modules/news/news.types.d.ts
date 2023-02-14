@@ -23,11 +23,6 @@ export type SourcesResponse = {
   sources: Source[];
 };
 
-export type GoogleTrendsByCountry = {
-  country: string;
-  trends: string[];
-};
-
 export type CountryCode =
   | 'ae'
   | 'ar'

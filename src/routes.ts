@@ -20,6 +20,8 @@ import { FootballController } from './modules/football/football.controller';
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 import { ForexController } from './modules/forex/forex.controller';
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+import { GoogleController } from './modules/google/google.controller';
+// WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 import { HealthController } from './modules/health/health.controller';
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 import { NewsController } from './modules/news/news.controller';
@@ -1336,6 +1338,31 @@ const models: TsoaRoute.Models = {
     },
   },
   // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+  'Record_string.number_': {
+    dataType: 'refAlias',
+    type: {
+      dataType: 'nestedObjectLiteral',
+      nestedProperties: {},
+      validators: {},
+    },
+  },
+  // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+  TrendsByCountry: {
+    dataType: 'refAlias',
+    type: {
+      dataType: 'nestedObjectLiteral',
+      nestedProperties: {
+        trends: {
+          dataType: 'array',
+          array: { dataType: 'string' },
+          required: true,
+        },
+        country: { dataType: 'string', required: true },
+      },
+      validators: {},
+    },
+  },
+  // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
   Article: {
     dataType: 'refAlias',
     type: {
@@ -1508,22 +1535,6 @@ const models: TsoaRoute.Models = {
         description: { dataType: 'string', required: true },
         name: { dataType: 'string', required: true },
         id: { dataType: 'string', required: true },
-      },
-      validators: {},
-    },
-  },
-  // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-  GoogleTrendsByCountry: {
-    dataType: 'refAlias',
-    type: {
-      dataType: 'nestedObjectLiteral',
-      nestedProperties: {
-        trends: {
-          dataType: 'array',
-          array: { dataType: 'string' },
-          required: true,
-        },
-        country: { dataType: 'string', required: true },
       },
       validators: {},
     },
@@ -2049,6 +2060,79 @@ export function RegisterRoutes(app: Router) {
   );
   // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
   app.get(
+    '/api/google/trends',
+    ...fetchMiddlewares<RequestHandler>(GoogleController),
+    ...fetchMiddlewares<RequestHandler>(
+      GoogleController.prototype.getGoogleTrends
+    ),
+
+    function GoogleController_getGoogleTrends(
+      request: any,
+      response: any,
+      next: any
+    ) {
+      const args = {
+        country: {
+          default: '',
+          in: 'query',
+          name: 'country',
+          dataType: 'string',
+        },
+      };
+
+      // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+      let validatedArgs: any[] = [];
+      try {
+        validatedArgs = getValidatedArgs(args, request, response);
+
+        const controller = new GoogleController();
+
+        const promise = controller.getGoogleTrends.apply(
+          controller,
+          validatedArgs as any
+        );
+        promiseHandler(controller, promise, response, 200, next);
+      } catch (err) {
+        return next(err);
+      }
+    }
+  );
+  // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+  app.get(
+    '/api/google/trends/countries',
+    ...fetchMiddlewares<RequestHandler>(GoogleController),
+    ...fetchMiddlewares<RequestHandler>(
+      GoogleController.prototype.getGoogleTrendsCoutries
+    ),
+
+    function GoogleController_getGoogleTrendsCoutries(
+      request: any,
+      response: any,
+      next: any
+    ) {
+      const args = {};
+
+      // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+      let validatedArgs: any[] = [];
+      try {
+        validatedArgs = getValidatedArgs(args, request, response);
+
+        const controller = new GoogleController();
+
+        const promise = controller.getGoogleTrendsCoutries.apply(
+          controller,
+          validatedArgs as any
+        );
+        promiseHandler(controller, promise, response, 200, next);
+      } catch (err) {
+        return next(err);
+      }
+    }
+  );
+  // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+  app.get(
     '/api/health',
     ...fetchMiddlewares<RequestHandler>(HealthController),
     ...fetchMiddlewares<RequestHandler>(HealthController.prototype.get),
@@ -2197,79 +2281,6 @@ export function RegisterRoutes(app: Router) {
         const controller = new NewsController();
 
         const promise = controller.getSources.apply(
-          controller,
-          validatedArgs as any
-        );
-        promiseHandler(controller, promise, response, 200, next);
-      } catch (err) {
-        return next(err);
-      }
-    }
-  );
-  // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-  app.get(
-    '/api/news/google-trends',
-    ...fetchMiddlewares<RequestHandler>(NewsController),
-    ...fetchMiddlewares<RequestHandler>(
-      NewsController.prototype.getGoogleTrends
-    ),
-
-    function NewsController_getGoogleTrends(
-      request: any,
-      response: any,
-      next: any
-    ) {
-      const args = {
-        country: {
-          default: '',
-          in: 'query',
-          name: 'country',
-          dataType: 'string',
-        },
-      };
-
-      // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-
-      let validatedArgs: any[] = [];
-      try {
-        validatedArgs = getValidatedArgs(args, request, response);
-
-        const controller = new NewsController();
-
-        const promise = controller.getGoogleTrends.apply(
-          controller,
-          validatedArgs as any
-        );
-        promiseHandler(controller, promise, response, 200, next);
-      } catch (err) {
-        return next(err);
-      }
-    }
-  );
-  // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-  app.get(
-    '/api/news/google-trends/countries',
-    ...fetchMiddlewares<RequestHandler>(NewsController),
-    ...fetchMiddlewares<RequestHandler>(
-      NewsController.prototype.getGoogleTrendsCoutries
-    ),
-
-    function NewsController_getGoogleTrendsCoutries(
-      request: any,
-      response: any,
-      next: any
-    ) {
-      const args = {};
-
-      // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-
-      let validatedArgs: any[] = [];
-      try {
-        validatedArgs = getValidatedArgs(args, request, response);
-
-        const controller = new NewsController();
-
-        const promise = controller.getGoogleTrendsCoutries.apply(
           controller,
           validatedArgs as any
         );
