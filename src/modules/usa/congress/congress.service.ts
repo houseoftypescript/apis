@@ -1,5 +1,5 @@
-import environments from '../../common/environments';
-import { get } from '../../common/libs/axios';
+import environments from '../../../common/environments';
+import { get } from '../../../common/libs/axios';
 import {
   Chamber,
   CongressCommittee,
@@ -39,4 +39,21 @@ export const getCommittees = async (
     headers: { 'X-API-Key': environments.apiKey.proPublicaCongress },
   });
   return response.results[0].committees || [];
+};
+
+export const getCommittee = async (
+  id: string,
+  {
+    chamber = 'house',
+    congress = 118,
+  }: { chamber: Chamber; congress: number } = {
+    chamber: 'house',
+    congress: 118,
+  }
+): Promise<CongressResponse> => {
+  const url = `${BASE_URL}/${congress}/${chamber}/committees/${id}.json`;
+  const response: CongressResponse = await get<CongressResponse>(url, {
+    headers: { 'X-API-Key': environments.apiKey.proPublicaCongress },
+  });
+  return response;
 };

@@ -14,6 +14,19 @@ export type CongressResult = {
   members?: CongressMember[];
 };
 
+export type CongressCommitteeMember = {
+  id: string;
+  name: string;
+  api_uri: string;
+  party: string;
+  chamber: string;
+  side: string;
+  rank_in_party: number;
+  state: string;
+  note: string;
+  begin_date: null;
+};
+
 export type CongressCommittee = {
   id: string;
   name: string;
@@ -27,6 +40,7 @@ export type CongressCommittee = {
   chair_uri: string;
   ranking_member_id: string;
   subcommittees: { id: string; name: string; api_uri: string }[];
+  current_members?: CongressCommitteeMember[];
 };
 
 export type CongressMember = {

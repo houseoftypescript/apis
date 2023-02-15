@@ -12,8 +12,6 @@ import {
   fetchMiddlewares,
 } from '@tsoa/runtime';
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-import { CongressController } from './modules/congress/congress.controller';
-// WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 import { CountriesController } from './modules/countries/countries.controller';
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 import { FootballController } from './modules/football/football.controller';
@@ -34,113 +32,14 @@ import { TimeZonesController } from './modules/time-zones/time-zones.controller'
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 import { TwitterController } from './modules/twitter/twitter.controller';
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+import { CongressController } from './modules/usa/congress/congress.controller';
+// WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 import { WeatherController } from './modules/weather/weather.controller';
 import type { RequestHandler, Router } from 'express';
 
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 
 const models: TsoaRoute.Models = {
-  Chamber: {
-    dataType: 'refAlias',
-    type: {
-      dataType: 'union',
-      subSchemas: [
-        { dataType: 'enum', enums: ['house'] },
-        { dataType: 'enum', enums: ['senate'] },
-      ],
-      validators: {},
-    },
-  },
-  // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-  CongressMember: {
-    dataType: 'refAlias',
-    type: {
-      dataType: 'nestedObjectLiteral',
-      nestedProperties: {
-        votes_against_party_pct: { dataType: 'double', required: true },
-        votes_with_party_pct: { dataType: 'double', required: true },
-        missed_votes_pct: { dataType: 'double', required: true },
-        geoid: { dataType: 'string', required: true },
-        at_large: { dataType: 'enum', enums: [false], required: true },
-        district: { dataType: 'string', required: true },
-        state: { dataType: 'string', required: true },
-        fax: { dataType: 'string', required: true },
-        phone: { dataType: 'string', required: true },
-        office: { dataType: 'string', required: true },
-        ocd_id: { dataType: 'string', required: true },
-        last_updated: { dataType: 'string', required: true },
-        total_present: { dataType: 'double', required: true },
-        missed_votes: { dataType: 'double', required: true },
-        total_votes: { dataType: 'double', required: true },
-        next_election: { dataType: 'string', required: true },
-        seniority: { dataType: 'string', required: true },
-        ideal_point: { dataType: 'string', required: true },
-        dw_nominate: { dataType: 'string', required: true },
-        cook_pvi: { dataType: 'string', required: true },
-        in_office: { dataType: 'boolean', required: true },
-        contact_form: { dataType: 'string', required: true },
-        rss_url: { dataType: 'string', required: true },
-        url: { dataType: 'string', required: true },
-        fec_candidate_id: { dataType: 'string', required: true },
-        google_entity_id: { dataType: 'string', required: true },
-        crp_id: { dataType: 'string', required: true },
-        icpsr_id: { dataType: 'string', required: true },
-        votesmart_id: { dataType: 'string', required: true },
-        cspan_id: { dataType: 'string', required: true },
-        govtrack_id: { dataType: 'string', required: true },
-        youtube_account: { dataType: 'string', required: true },
-        facebook_account: { dataType: 'string', required: true },
-        twitter_account: { dataType: 'string', required: true },
-        leadership_role: { dataType: 'string', required: true },
-        party: { dataType: 'string', required: true },
-        gender: { dataType: 'string', required: true },
-        date_of_birth: { dataType: 'string', required: true },
-        suffix: { dataType: 'string', required: true },
-        last_name: { dataType: 'string', required: true },
-        middle_name: { dataType: 'string', required: true },
-        first_name: { dataType: 'string', required: true },
-        api_uri: { dataType: 'string', required: true },
-        short_title: { dataType: 'string', required: true },
-        title: { dataType: 'string', required: true },
-        id: { dataType: 'string', required: true },
-      },
-      validators: {},
-    },
-  },
-  // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-  CongressCommittee: {
-    dataType: 'refAlias',
-    type: {
-      dataType: 'nestedObjectLiteral',
-      nestedProperties: {
-        subcommittees: {
-          dataType: 'array',
-          array: {
-            dataType: 'nestedObjectLiteral',
-            nestedProperties: {
-              api_uri: { dataType: 'string', required: true },
-              name: { dataType: 'string', required: true },
-              id: { dataType: 'string', required: true },
-            },
-          },
-          required: true,
-        },
-        ranking_member_id: { dataType: 'string', required: true },
-        chair_uri: { dataType: 'string', required: true },
-        chair_state: { dataType: 'string', required: true },
-        chair_party: { dataType: 'string', required: true },
-        chair_id: { dataType: 'string', required: true },
-        chair: { dataType: 'string', required: true },
-        api_uri: { dataType: 'string', required: true },
-        url: { dataType: 'string', required: true },
-        chamber: { dataType: 'string', required: true },
-        name: { dataType: 'string', required: true },
-        id: { dataType: 'string', required: true },
-      },
-      validators: {},
-    },
-  },
-  // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
   Isl: {
     dataType: 'refObject',
     properties: {
@@ -1687,6 +1586,169 @@ const models: TsoaRoute.Models = {
     },
   },
   // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+  Chamber: {
+    dataType: 'refAlias',
+    type: {
+      dataType: 'union',
+      subSchemas: [
+        { dataType: 'enum', enums: ['house'] },
+        { dataType: 'enum', enums: ['senate'] },
+      ],
+      validators: {},
+    },
+  },
+  // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+  CongressMember: {
+    dataType: 'refAlias',
+    type: {
+      dataType: 'nestedObjectLiteral',
+      nestedProperties: {
+        votes_against_party_pct: { dataType: 'double', required: true },
+        votes_with_party_pct: { dataType: 'double', required: true },
+        missed_votes_pct: { dataType: 'double', required: true },
+        geoid: { dataType: 'string', required: true },
+        at_large: { dataType: 'enum', enums: [false], required: true },
+        district: { dataType: 'string', required: true },
+        state: { dataType: 'string', required: true },
+        fax: { dataType: 'string', required: true },
+        phone: { dataType: 'string', required: true },
+        office: { dataType: 'string', required: true },
+        ocd_id: { dataType: 'string', required: true },
+        last_updated: { dataType: 'string', required: true },
+        total_present: { dataType: 'double', required: true },
+        missed_votes: { dataType: 'double', required: true },
+        total_votes: { dataType: 'double', required: true },
+        next_election: { dataType: 'string', required: true },
+        seniority: { dataType: 'string', required: true },
+        ideal_point: { dataType: 'string', required: true },
+        dw_nominate: { dataType: 'string', required: true },
+        cook_pvi: { dataType: 'string', required: true },
+        in_office: { dataType: 'boolean', required: true },
+        contact_form: { dataType: 'string', required: true },
+        rss_url: { dataType: 'string', required: true },
+        url: { dataType: 'string', required: true },
+        fec_candidate_id: { dataType: 'string', required: true },
+        google_entity_id: { dataType: 'string', required: true },
+        crp_id: { dataType: 'string', required: true },
+        icpsr_id: { dataType: 'string', required: true },
+        votesmart_id: { dataType: 'string', required: true },
+        cspan_id: { dataType: 'string', required: true },
+        govtrack_id: { dataType: 'string', required: true },
+        youtube_account: { dataType: 'string', required: true },
+        facebook_account: { dataType: 'string', required: true },
+        twitter_account: { dataType: 'string', required: true },
+        leadership_role: { dataType: 'string', required: true },
+        party: { dataType: 'string', required: true },
+        gender: { dataType: 'string', required: true },
+        date_of_birth: { dataType: 'string', required: true },
+        suffix: { dataType: 'string', required: true },
+        last_name: { dataType: 'string', required: true },
+        middle_name: { dataType: 'string', required: true },
+        first_name: { dataType: 'string', required: true },
+        api_uri: { dataType: 'string', required: true },
+        short_title: { dataType: 'string', required: true },
+        title: { dataType: 'string', required: true },
+        id: { dataType: 'string', required: true },
+      },
+      validators: {},
+    },
+  },
+  // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+  CongressCommitteeMember: {
+    dataType: 'refAlias',
+    type: {
+      dataType: 'nestedObjectLiteral',
+      nestedProperties: {
+        begin_date: { dataType: 'enum', enums: [null], required: true },
+        note: { dataType: 'string', required: true },
+        state: { dataType: 'string', required: true },
+        rank_in_party: { dataType: 'double', required: true },
+        side: { dataType: 'string', required: true },
+        chamber: { dataType: 'string', required: true },
+        party: { dataType: 'string', required: true },
+        api_uri: { dataType: 'string', required: true },
+        name: { dataType: 'string', required: true },
+        id: { dataType: 'string', required: true },
+      },
+      validators: {},
+    },
+  },
+  // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+  CongressCommittee: {
+    dataType: 'refAlias',
+    type: {
+      dataType: 'nestedObjectLiteral',
+      nestedProperties: {
+        current_members: {
+          dataType: 'array',
+          array: { dataType: 'refAlias', ref: 'CongressCommitteeMember' },
+        },
+        subcommittees: {
+          dataType: 'array',
+          array: {
+            dataType: 'nestedObjectLiteral',
+            nestedProperties: {
+              api_uri: { dataType: 'string', required: true },
+              name: { dataType: 'string', required: true },
+              id: { dataType: 'string', required: true },
+            },
+          },
+          required: true,
+        },
+        ranking_member_id: { dataType: 'string', required: true },
+        chair_uri: { dataType: 'string', required: true },
+        chair_state: { dataType: 'string', required: true },
+        chair_party: { dataType: 'string', required: true },
+        chair_id: { dataType: 'string', required: true },
+        chair: { dataType: 'string', required: true },
+        api_uri: { dataType: 'string', required: true },
+        url: { dataType: 'string', required: true },
+        chamber: { dataType: 'string', required: true },
+        name: { dataType: 'string', required: true },
+        id: { dataType: 'string', required: true },
+      },
+      validators: {},
+    },
+  },
+  // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+  CongressResult: {
+    dataType: 'refAlias',
+    type: {
+      dataType: 'nestedObjectLiteral',
+      nestedProperties: {
+        members: {
+          dataType: 'array',
+          array: { dataType: 'refAlias', ref: 'CongressMember' },
+        },
+        committees: {
+          dataType: 'array',
+          array: { dataType: 'refAlias', ref: 'CongressCommittee' },
+        },
+        num_results: { dataType: 'double', required: true },
+        chamber: { dataType: 'string', required: true },
+        congress: { dataType: 'string', required: true },
+      },
+      validators: {},
+    },
+  },
+  // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+  CongressResponse: {
+    dataType: 'refAlias',
+    type: {
+      dataType: 'nestedObjectLiteral',
+      nestedProperties: {
+        results: {
+          dataType: 'array',
+          array: { dataType: 'refAlias', ref: 'CongressResult' },
+          required: true,
+        },
+        copyright: { dataType: 'string', required: true },
+        status: { dataType: 'string', required: true },
+      },
+      validators: {},
+    },
+  },
+  // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
   Weather: {
     dataType: 'refAlias',
     type: {
@@ -1772,131 +1834,6 @@ export function RegisterRoutes(app: Router) {
   //  NOTE: If you do not see routes for all of your controllers in this file, then you might not have informed tsoa of where to look
   //      Please look into the "controllerPathGlobs" config option described in the readme: https://github.com/lukeautry/tsoa
   // ###########################################################################################################
-  app.get(
-    '/api/congress',
-    ...fetchMiddlewares<RequestHandler>(CongressController),
-    ...fetchMiddlewares<RequestHandler>(
-      CongressController.prototype.getCongress
-    ),
-
-    function CongressController_getCongress(
-      request: any,
-      response: any,
-      next: any
-    ) {
-      const args = {};
-
-      // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-
-      let validatedArgs: any[] = [];
-      try {
-        validatedArgs = getValidatedArgs(args, request, response);
-
-        const controller = new CongressController();
-
-        const promise = controller.getCongress.apply(
-          controller,
-          validatedArgs as any
-        );
-        promiseHandler(controller, promise, response, 200, next);
-      } catch (err) {
-        return next(err);
-      }
-    }
-  );
-  // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-  app.get(
-    '/api/congress/members',
-    ...fetchMiddlewares<RequestHandler>(CongressController),
-    ...fetchMiddlewares<RequestHandler>(
-      CongressController.prototype.getMembers
-    ),
-
-    function CongressController_getMembers(
-      request: any,
-      response: any,
-      next: any
-    ) {
-      const args = {
-        chamber: {
-          default: 'house',
-          in: 'query',
-          name: 'chamber',
-          ref: 'Chamber',
-        },
-        congress: {
-          default: 118,
-          in: 'query',
-          name: 'congress',
-          dataType: 'double',
-        },
-      };
-
-      // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-
-      let validatedArgs: any[] = [];
-      try {
-        validatedArgs = getValidatedArgs(args, request, response);
-
-        const controller = new CongressController();
-
-        const promise = controller.getMembers.apply(
-          controller,
-          validatedArgs as any
-        );
-        promiseHandler(controller, promise, response, 200, next);
-      } catch (err) {
-        return next(err);
-      }
-    }
-  );
-  // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-  app.get(
-    '/api/congress/committees',
-    ...fetchMiddlewares<RequestHandler>(CongressController),
-    ...fetchMiddlewares<RequestHandler>(
-      CongressController.prototype.getCommittees
-    ),
-
-    function CongressController_getCommittees(
-      request: any,
-      response: any,
-      next: any
-    ) {
-      const args = {
-        chamber: {
-          default: 'house',
-          in: 'query',
-          name: 'chamber',
-          ref: 'Chamber',
-        },
-        congress: {
-          default: 118,
-          in: 'query',
-          name: 'congress',
-          dataType: 'double',
-        },
-      };
-
-      // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-
-      let validatedArgs: any[] = [];
-      try {
-        validatedArgs = getValidatedArgs(args, request, response);
-
-        const controller = new CongressController();
-
-        const promise = controller.getCommittees.apply(
-          controller,
-          validatedArgs as any
-        );
-        promiseHandler(controller, promise, response, 200, next);
-      } catch (err) {
-        return next(err);
-      }
-    }
-  );
-  // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
   app.get(
     '/api/countries',
     ...fetchMiddlewares<RequestHandler>(CountriesController),
@@ -2701,6 +2638,178 @@ export function RegisterRoutes(app: Router) {
         const controller = new TwitterController();
 
         const promise = controller.getPlaces.apply(
+          controller,
+          validatedArgs as any
+        );
+        promiseHandler(controller, promise, response, 200, next);
+      } catch (err) {
+        return next(err);
+      }
+    }
+  );
+  // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+  app.get(
+    '/api/usa/congress',
+    ...fetchMiddlewares<RequestHandler>(CongressController),
+    ...fetchMiddlewares<RequestHandler>(
+      CongressController.prototype.getCongress
+    ),
+
+    function CongressController_getCongress(
+      request: any,
+      response: any,
+      next: any
+    ) {
+      const args = {};
+
+      // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+      let validatedArgs: any[] = [];
+      try {
+        validatedArgs = getValidatedArgs(args, request, response);
+
+        const controller = new CongressController();
+
+        const promise = controller.getCongress.apply(
+          controller,
+          validatedArgs as any
+        );
+        promiseHandler(controller, promise, response, 200, next);
+      } catch (err) {
+        return next(err);
+      }
+    }
+  );
+  // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+  app.get(
+    '/api/usa/congress/members',
+    ...fetchMiddlewares<RequestHandler>(CongressController),
+    ...fetchMiddlewares<RequestHandler>(
+      CongressController.prototype.getMembers
+    ),
+
+    function CongressController_getMembers(
+      request: any,
+      response: any,
+      next: any
+    ) {
+      const args = {
+        chamber: {
+          default: 'house',
+          in: 'query',
+          name: 'chamber',
+          ref: 'Chamber',
+        },
+        congress: {
+          default: 118,
+          in: 'query',
+          name: 'congress',
+          dataType: 'double',
+        },
+      };
+
+      // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+      let validatedArgs: any[] = [];
+      try {
+        validatedArgs = getValidatedArgs(args, request, response);
+
+        const controller = new CongressController();
+
+        const promise = controller.getMembers.apply(
+          controller,
+          validatedArgs as any
+        );
+        promiseHandler(controller, promise, response, 200, next);
+      } catch (err) {
+        return next(err);
+      }
+    }
+  );
+  // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+  app.get(
+    '/api/usa/congress/committees',
+    ...fetchMiddlewares<RequestHandler>(CongressController),
+    ...fetchMiddlewares<RequestHandler>(
+      CongressController.prototype.getCommittees
+    ),
+
+    function CongressController_getCommittees(
+      request: any,
+      response: any,
+      next: any
+    ) {
+      const args = {
+        chamber: {
+          default: 'house',
+          in: 'query',
+          name: 'chamber',
+          ref: 'Chamber',
+        },
+        congress: {
+          default: 118,
+          in: 'query',
+          name: 'congress',
+          dataType: 'double',
+        },
+      };
+
+      // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+      let validatedArgs: any[] = [];
+      try {
+        validatedArgs = getValidatedArgs(args, request, response);
+
+        const controller = new CongressController();
+
+        const promise = controller.getCommittees.apply(
+          controller,
+          validatedArgs as any
+        );
+        promiseHandler(controller, promise, response, 200, next);
+      } catch (err) {
+        return next(err);
+      }
+    }
+  );
+  // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+  app.get(
+    '/api/usa/congress/committees/:id',
+    ...fetchMiddlewares<RequestHandler>(CongressController),
+    ...fetchMiddlewares<RequestHandler>(
+      CongressController.prototype.getCommittee
+    ),
+
+    function CongressController_getCommittee(
+      request: any,
+      response: any,
+      next: any
+    ) {
+      const args = {
+        id: { in: 'path', name: 'id', required: true, dataType: 'string' },
+        chamber: {
+          default: 'house',
+          in: 'query',
+          name: 'chamber',
+          ref: 'Chamber',
+        },
+        congress: {
+          default: 118,
+          in: 'query',
+          name: 'congress',
+          dataType: 'double',
+        },
+      };
+
+      // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+      let validatedArgs: any[] = [];
+      try {
+        validatedArgs = getValidatedArgs(args, request, response);
+
+        const controller = new CongressController();
+
+        const promise = controller.getCommittee.apply(
           controller,
           validatedArgs as any
         );
