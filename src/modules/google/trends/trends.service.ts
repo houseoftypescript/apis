@@ -33,7 +33,6 @@ export const getGoogleTrends = async (
   const sortedTrendsByNumber: Record<string, number> = Object.fromEntries(
     new Map([...trendsByNumber.entries()].sort((a, b) => b[1] - a[1]))
   );
-  console.log(sortedTrendsByNumber);
   return { trendsByNumber: sortedTrendsByNumber, trendsByCountries };
 };
 

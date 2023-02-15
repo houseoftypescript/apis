@@ -2,7 +2,7 @@ import { getCountries as getRestCountries } from '../../common/clients/apis/rest
 import { Country } from '../../common/clients/apis/rest-countries/types';
 import redisClient from '../../common/clients/redis';
 import logger from '../../common/libs/logger';
-import { CountryCodes } from './countries.types';
+import { CountryCodes, CountryRegions } from './countries.types';
 
 export const getCountries = async (): Promise<Country[]> => {
   try {
@@ -40,6 +40,20 @@ export const getCountryCodes = async (): Promise<CountryCodes[]> => {
         official: country.name.official,
         cca2: country.cca2,
         cca3: country.cca3,
+      };
+    })
+    .sort((a, b) => (a.name > b.name ? 1 : -1));
+};
+
+export const getCountriesRegions = async (): Promise<CountryRegions[]> => {
+  const countries: Country[] = await getCountries();
+  return countries
+    .map((country) => {
+      return {
+        name: country.name.common,
+        official: country.name.official,
+        region: country.region,
+        subregion: country.subregion || '',
       };
     })
     .sort((a, b) => (a.name > b.name ? 1 : -1));

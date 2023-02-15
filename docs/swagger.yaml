@@ -1358,6 +1358,22 @@ components:
         - 'official'
         - 'name'
       type: 'object'
+    CountryRegions:
+      properties:
+        subregion:
+          type: 'string'
+        region:
+          type: 'string'
+        official:
+          type: 'string'
+        name:
+          type: 'string'
+      required:
+        - 'subregion'
+        - 'region'
+        - 'official'
+        - 'name'
+      type: 'object'
     Competition:
       properties:
         lastUpdated:
@@ -2966,6 +2982,22 @@ paths:
               schema:
                 items:
                   $ref: '#/components/schemas/CountryCodes'
+                type: 'array'
+      tags:
+        - 'Countries'
+      security: []
+      parameters: []
+  /api/countries/regions:
+    get:
+      operationId: 'GetCountriesRegions'
+      responses:
+        200:
+          description: 'Get Country Codes'
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/CountryRegions'
                 type: 'array'
       tags:
         - 'Countries'
