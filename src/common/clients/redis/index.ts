@@ -1,5 +1,6 @@
 import environments from '../../environments';
 import { SetOptions, createClient } from 'redis';
+import logger from '../../libs/logger';
 
 class RedisClient {
   private client: ReturnType<typeof createClient>;
@@ -20,6 +21,7 @@ class RedisClient {
     try {
       return JSON.parse(value) as T;
     } catch (error) {
+      logger.error(`redisClient.get - JSON.parse - Error ${error}`);
       return value as T;
     }
   }

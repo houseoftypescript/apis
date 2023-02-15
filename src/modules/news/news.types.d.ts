@@ -80,7 +80,7 @@ export type CountryCode =
   | 'za'
   | '';
 
-type Category =
+type NewsCategory =
   | 'business'
   | 'entertainment'
   | 'general'

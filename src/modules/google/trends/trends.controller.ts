@@ -1,11 +1,11 @@
 import { Controller, Get, Query, Route, SuccessResponse, Tags } from 'tsoa';
-import { getGoogleTrends, getGoogleTrendsCoutries } from './google.service';
-import { TrendsByCountry } from './google.types';
+import { getGoogleTrends, getGoogleTrendsCoutries } from './trends.service';
+import { TrendsByCountry } from './trends.types';
 
-@Tags('Google')
-@Route('api/google')
+@Tags('Google', 'Trends')
+@Route('api/google/trends')
 export class GoogleController extends Controller {
-  @Get('/trends')
+  @Get()
   @SuccessResponse('200', 'Get Google Trends')
   public getGoogleTrends(@Query('country') country = ''): Promise<{
     trendsByNumber: Record<string, number>;
@@ -14,7 +14,7 @@ export class GoogleController extends Controller {
     return getGoogleTrends(country);
   }
 
-  @Get('/trends/countries')
+  @Get('countries')
   @SuccessResponse('200', 'Get Google Trends')
   public getGoogleTrendsCoutries(): Promise<string[]> {
     return getGoogleTrendsCoutries();

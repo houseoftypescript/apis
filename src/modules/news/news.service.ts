@@ -8,8 +8,8 @@ import { SyncResponse } from '../../common/models';
 import {
   Article,
   ArticlesResponse,
-  Category,
   Language,
+  NewsCategory,
   SearchIn,
   SortBy,
   SourcesResponse,
@@ -88,7 +88,7 @@ export const getHeadlines = async (
     pageSize = 100,
   }: {
     query?: string;
-    category?: Category;
+    category?: NewsCategory;
     country?: string;
     sources?: string[];
     page?: number;

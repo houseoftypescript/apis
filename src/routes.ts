@@ -20,7 +20,9 @@ import { FootballController } from './modules/football/football.controller';
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 import { ForexController } from './modules/forex/forex.controller';
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-import { GoogleController } from './modules/google/google.controller';
+import { GoogleController } from './modules/google/trends/trends.controller';
+// WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+import { YouTubeController } from './modules/google/youtube/youtube.controller';
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 import { HealthController } from './modules/health/health.controller';
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
@@ -861,6 +863,20 @@ const models: TsoaRoute.Models = {
     additionalProperties: false,
   },
   // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+  CountryCodes: {
+    dataType: 'refAlias',
+    type: {
+      dataType: 'nestedObjectLiteral',
+      nestedProperties: {
+        cca3: { dataType: 'string', required: true },
+        cca2: { dataType: 'string', required: true },
+        official: { dataType: 'string', required: true },
+        name: { dataType: 'string', required: true },
+      },
+      validators: {},
+    },
+  },
+  // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
   Competition: {
     dataType: 'refAlias',
     type: {
@@ -1365,6 +1381,82 @@ const models: TsoaRoute.Models = {
     },
   },
   // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+  YouTubeVideo: {
+    dataType: 'refAlias',
+    type: {
+      dataType: 'nestedObjectLiteral',
+      nestedProperties: {
+        snippet: {
+          dataType: 'nestedObjectLiteral',
+          nestedProperties: {
+            defaultAudioLanguage: { dataType: 'string', required: true },
+            localized: {
+              dataType: 'nestedObjectLiteral',
+              nestedProperties: {
+                description: { dataType: 'string', required: true },
+                title: { dataType: 'string', required: true },
+              },
+              required: true,
+            },
+            defaultLanguage: { dataType: 'string', required: true },
+            liveBroadcastContent: { dataType: 'string', required: true },
+            categoryId: { dataType: 'string', required: true },
+            tags: {
+              dataType: 'array',
+              array: { dataType: 'string' },
+              required: true,
+            },
+            channelTitle: { dataType: 'string', required: true },
+            thumbnails: {
+              dataType: 'nestedObjectLiteral',
+              nestedProperties: {},
+              additionalProperties: {
+                dataType: 'nestedObjectLiteral',
+                nestedProperties: {
+                  height: { dataType: 'double', required: true },
+                  width: { dataType: 'double', required: true },
+                  url: { dataType: 'string', required: true },
+                },
+              },
+              required: true,
+            },
+            description: { dataType: 'string', required: true },
+            title: { dataType: 'string', required: true },
+            channelId: { dataType: 'string', required: true },
+            publishedAt: { dataType: 'string', required: true },
+          },
+          required: true,
+        },
+        id: { dataType: 'string', required: true },
+        etag: { dataType: 'string', required: true },
+        kind: { dataType: 'string', required: true },
+      },
+      validators: {},
+    },
+  },
+  // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+  YouTubeCategory: {
+    dataType: 'refAlias',
+    type: {
+      dataType: 'nestedObjectLiteral',
+      nestedProperties: {
+        snippet: {
+          dataType: 'nestedObjectLiteral',
+          nestedProperties: {
+            assignable: { dataType: 'boolean', required: true },
+            title: { dataType: 'string', required: true },
+            channelId: { dataType: 'string', required: true },
+          },
+          required: true,
+        },
+        id: { dataType: 'string', required: true },
+        etag: { dataType: 'string', required: true },
+        kind: { dataType: 'string', required: true },
+      },
+      validators: {},
+    },
+  },
+  // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
   Article: {
     dataType: 'refAlias',
     type: {
@@ -1507,7 +1599,7 @@ const models: TsoaRoute.Models = {
     },
   },
   // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-  Category: {
+  NewsCategory: {
     dataType: 'refAlias',
     type: {
       dataType: 'union',
@@ -1828,6 +1920,39 @@ export function RegisterRoutes(app: Router) {
         const controller = new CountriesController();
 
         const promise = controller.getCountries.apply(
+          controller,
+          validatedArgs as any
+        );
+        promiseHandler(controller, promise, response, 200, next);
+      } catch (err) {
+        return next(err);
+      }
+    }
+  );
+  // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+  app.get(
+    '/api/countries/codes',
+    ...fetchMiddlewares<RequestHandler>(CountriesController),
+    ...fetchMiddlewares<RequestHandler>(
+      CountriesController.prototype.getCountryCodes
+    ),
+
+    function CountriesController_getCountryCodes(
+      request: any,
+      response: any,
+      next: any
+    ) {
+      const args = {};
+
+      // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+      let validatedArgs: any[] = [];
+      try {
+        validatedArgs = getValidatedArgs(args, request, response);
+
+        const controller = new CountriesController();
+
+        const promise = controller.getCountryCodes.apply(
           controller,
           validatedArgs as any
         );
@@ -2174,6 +2299,92 @@ export function RegisterRoutes(app: Router) {
   );
   // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
   app.get(
+    '/api/google/youtube/trending',
+    ...fetchMiddlewares<RequestHandler>(YouTubeController),
+    ...fetchMiddlewares<RequestHandler>(
+      YouTubeController.prototype.getTrending
+    ),
+
+    function YouTubeController_getTrending(
+      request: any,
+      response: any,
+      next: any
+    ) {
+      const args = {
+        regionCode: {
+          default: 'us',
+          in: 'query',
+          name: 'regionCode',
+          dataType: 'string',
+        },
+        videoCategoryId: {
+          default: 0,
+          in: 'query',
+          name: 'videoCategoryId',
+          dataType: 'double',
+        },
+      };
+
+      // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+      let validatedArgs: any[] = [];
+      try {
+        validatedArgs = getValidatedArgs(args, request, response);
+
+        const controller = new YouTubeController();
+
+        const promise = controller.getTrending.apply(
+          controller,
+          validatedArgs as any
+        );
+        promiseHandler(controller, promise, response, 200, next);
+      } catch (err) {
+        return next(err);
+      }
+    }
+  );
+  // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+  app.get(
+    '/api/google/youtube/categories',
+    ...fetchMiddlewares<RequestHandler>(YouTubeController),
+    ...fetchMiddlewares<RequestHandler>(
+      YouTubeController.prototype.getCategories
+    ),
+
+    function YouTubeController_getCategories(
+      request: any,
+      response: any,
+      next: any
+    ) {
+      const args = {
+        regionCode: {
+          default: 'us',
+          in: 'query',
+          name: 'regionCode',
+          dataType: 'string',
+        },
+      };
+
+      // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+      let validatedArgs: any[] = [];
+      try {
+        validatedArgs = getValidatedArgs(args, request, response);
+
+        const controller = new YouTubeController();
+
+        const promise = controller.getCategories.apply(
+          controller,
+          validatedArgs as any
+        );
+        promiseHandler(controller, promise, response, 200, next);
+      } catch (err) {
+        return next(err);
+      }
+    }
+  );
+  // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+  app.get(
     '/api/health',
     ...fetchMiddlewares<RequestHandler>(HealthController),
     ...fetchMiddlewares<RequestHandler>(HealthController.prototype.get),
@@ -2275,7 +2486,7 @@ export function RegisterRoutes(app: Router) {
           default: '',
           in: 'query',
           name: 'category',
-          ref: 'Category',
+          ref: 'NewsCategory',
         },
         page: { default: 1, in: 'query', name: 'page', dataType: 'double' },
         pageSize: {

@@ -11,6 +11,7 @@ const API_KEY_PROPUBLICA_CONGRESS: string =
   process.env.API_KEY_PROPUBLICA_CONGRESS || '';
 const API_KEY_OPEN_WEATHER_MAP: string =
   process.env.API_KEY_OPEN_WEATHER_MAP || '';
+const API_KEY_YOUTUBE = process.env.API_KEY_YOUTUBE || '';
 // Database
 const REDIS_URL: string = process.env.REDIS_URL || '';
 
@@ -22,6 +23,7 @@ const environments = {
     news: API_KEY_NEWS,
     proPublicaCongress: API_KEY_PROPUBLICA_CONGRESS,
     openWeatherMap: API_KEY_OPEN_WEATHER_MAP,
+    youTube: API_KEY_YOUTUBE,
   },
   database: { redis: REDIS_URL },
 };

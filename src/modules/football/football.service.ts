@@ -96,6 +96,7 @@ export const getMatchesByTeam = async (id: string): Promise<Match[]> => {
     const key = `competitions-${id}`;
     logger.info(`getCompetition key ${key}`);
     await redisClient.connect();
+    logger.info('Redis is Connected');
     // Fetch Data from Cache
     const cacheMatches = await redisClient.get<Match[]>(key);
     if (cacheMatches !== null) {
@@ -114,5 +115,6 @@ export const getMatchesByTeam = async (id: string): Promise<Match[]> => {
     throw new Error('getCompetition Error');
   } finally {
     await redisClient.disconnect();
+    logger.info('Redis is Disconnected');
   }
 };

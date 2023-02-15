@@ -1551,6 +1551,22 @@ components:
         - 'capitalInfo'
       type: 'object'
       additionalProperties: false
+    CountryCodes:
+      properties:
+        cca3:
+          type: 'string'
+        cca2:
+          type: 'string'
+        official:
+          type: 'string'
+        name:
+          type: 'string'
+      required:
+        - 'cca3'
+        - 'cca2'
+        - 'official'
+        - 'name'
+      type: 'object'
     Competition:
       properties:
         lastUpdated:
@@ -2410,6 +2426,113 @@ components:
         - 'trends'
         - 'country'
       type: 'object'
+    YouTubeVideo:
+      properties:
+        snippet:
+          properties:
+            defaultAudioLanguage:
+              type: 'string'
+            localized:
+              properties:
+                description:
+                  type: 'string'
+                title:
+                  type: 'string'
+              required:
+                - 'description'
+                - 'title'
+              type: 'object'
+            defaultLanguage:
+              type: 'string'
+            liveBroadcastContent:
+              type: 'string'
+            categoryId:
+              type: 'string'
+            tags:
+              items:
+                type: 'string'
+              type: 'array'
+            channelTitle:
+              type: 'string'
+            thumbnails:
+              properties: {}
+              additionalProperties:
+                properties:
+                  height:
+                    type: 'number'
+                    format: 'double'
+                  width:
+                    type: 'number'
+                    format: 'double'
+                  url:
+                    type: 'string'
+                required:
+                  - 'height'
+                  - 'width'
+                  - 'url'
+                type: 'object'
+              type: 'object'
+            description:
+              type: 'string'
+            title:
+              type: 'string'
+            channelId:
+              type: 'string'
+            publishedAt:
+              type: 'string'
+          required:
+            - 'defaultAudioLanguage'
+            - 'localized'
+            - 'defaultLanguage'
+            - 'liveBroadcastContent'
+            - 'categoryId'
+            - 'tags'
+            - 'channelTitle'
+            - 'thumbnails'
+            - 'description'
+            - 'title'
+            - 'channelId'
+            - 'publishedAt'
+          type: 'object'
+        id:
+          type: 'string'
+        etag:
+          type: 'string'
+        kind:
+          type: 'string'
+      required:
+        - 'snippet'
+        - 'id'
+        - 'etag'
+        - 'kind'
+      type: 'object'
+    YouTubeCategory:
+      properties:
+        snippet:
+          properties:
+            assignable:
+              type: 'boolean'
+            title:
+              type: 'string'
+            channelId:
+              type: 'string'
+          required:
+            - 'assignable'
+            - 'title'
+            - 'channelId'
+          type: 'object'
+        id:
+          type: 'string'
+        etag:
+          type: 'string'
+        kind:
+          type: 'string'
+      required:
+        - 'snippet'
+        - 'id'
+        - 'etag'
+        - 'kind'
+      type: 'object'
     Article:
       properties:
         content:
@@ -2535,7 +2658,7 @@ components:
         - 've'
         - 'za'
         - ''
-    Category:
+    NewsCategory:
       type: 'string'
       enum:
         - 'business'
@@ -2836,6 +2959,22 @@ paths:
         - 'Countries'
       security: []
       parameters: []
+  /api/countries/codes:
+    get:
+      operationId: 'GetCountryCodes'
+      responses:
+        200:
+          description: 'Get Country Codes'
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/CountryCodes'
+                type: 'array'
+      tags:
+        - 'Countries'
+      security: []
+      parameters: []
   /api/football/competitions:
     get:
       operationId: 'GetCompetitions'
@@ -3002,6 +3141,7 @@ paths:
                 type: 'object'
       tags:
         - 'Google'
+        - 'Trends'
       security: []
       parameters:
         - in: 'query'
@@ -3024,8 +3164,62 @@ paths:
                 type: 'array'
       tags:
         - 'Google'
+        - 'Trends'
       security: []
       parameters: []
+  /api/google/youtube/trending:
+    get:
+      operationId: 'GetTrending'
+      responses:
+        200:
+          description: 'Get Trending'
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/YouTubeVideo'
+                type: 'array'
+      tags:
+        - 'Google'
+        - 'YouTube'
+      security: []
+      parameters:
+        - in: 'query'
+          name: 'regionCode'
+          required: false
+          schema:
+            default: 'us'
+            type: 'string'
+        - in: 'query'
+          name: 'videoCategoryId'
+          required: false
+          schema:
+            default: 0
+            format: 'double'
+            type: 'number'
+  /api/google/youtube/categories:
+    get:
+      operationId: 'GetCategories'
+      responses:
+        200:
+          description: 'Get Categories'
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/YouTubeCategory'
+                type: 'array'
+      tags:
+        - 'Google'
+        - 'YouTube'
+      security: []
+      parameters:
+        - in: 'query'
+          name: 'regionCode'
+          required: false
+          schema:
+            default: 'us'
+            type: 'string'
   /api/health:
     get:
       operationId: 'Get'
@@ -3139,7 +3333,7 @@ paths:
           name: 'category'
           required: false
           schema:
-            $ref: '#/components/schemas/Category'
+            $ref: '#/components/schemas/NewsCategory'
         - in: 'query'
           name: 'page'
           required: false

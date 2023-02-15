@@ -1,5 +1,5 @@
-import { get } from '../../common/libs/axios';
-import { TrendsByCountry } from './google.types';
+import { get } from '../../../common/libs/axios';
+import { TrendsByCountry } from './trends.types';
 
 export const getGoogleTrends = async (
   country: string
