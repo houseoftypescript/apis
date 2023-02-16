@@ -57,7 +57,9 @@ export const syncRates = async (): Promise<SyncResponse> => {
         data: rates,
         skipDuplicates: true,
       });
-    logger.info(`Sync Forex Rates to PostgreSQL: ${batchPayload}`);
+    logger.info(
+      `Sync Forex Rates to PostgreSQL: ${JSON.stringify(batchPayload)}`
+    );
     return { status: 'ok', count: batchPayload.count };
   } catch (error) {
     logger.info(`Sync Forex Rates Error: ${error}`);
