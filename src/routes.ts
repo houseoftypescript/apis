@@ -12,6 +12,10 @@ import {
   fetchMiddlewares,
 } from '@tsoa/runtime';
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+import { ChessController } from './modules/chess/chess.com/chess.controller';
+// WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+import { LichessController } from './modules/chess/lichess.org/lichess.controller';
+// WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 import { CountriesController } from './modules/countries/countries.controller';
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 import { FootballController } from './modules/football/football.controller';
@@ -40,6 +44,235 @@ import type { RequestHandler, Router } from 'express';
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 
 const models: TsoaRoute.Models = {
+  Title: {
+    dataType: 'refAlias',
+    type: {
+      dataType: 'union',
+      subSchemas: [
+        { dataType: 'enum', enums: ['GM'] },
+        { dataType: 'enum', enums: ['WGM'] },
+        { dataType: 'enum', enums: ['IM'] },
+        { dataType: 'enum', enums: ['WIM'] },
+        { dataType: 'enum', enums: ['FM'] },
+        { dataType: 'enum', enums: ['WFM'] },
+        { dataType: 'enum', enums: ['NM'] },
+        { dataType: 'enum', enums: ['WNM'] },
+        { dataType: 'enum', enums: ['CM'] },
+        { dataType: 'enum', enums: ['WCM'] },
+      ],
+      validators: {},
+    },
+  },
+  // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+  Profile: {
+    dataType: 'refAlias',
+    type: {
+      dataType: 'nestedObjectLiteral',
+      nestedProperties: {
+        fide: { dataType: 'double', required: true },
+        twitch_url: { dataType: 'string', required: true },
+        is_streamer: { dataType: 'boolean', required: true },
+        followers: { dataType: 'double', required: true },
+        last_online: { dataType: 'double', required: true },
+        joined: { dataType: 'double', required: true },
+        country: { dataType: 'string', required: true },
+        location: { dataType: 'string', required: true },
+        avatar: { dataType: 'string', required: true },
+        name: { dataType: 'string', required: true },
+        status: { dataType: 'string', required: true },
+        title: { dataType: 'string', required: true },
+        player_id: { dataType: 'double', required: true },
+        username: { dataType: 'string', required: true },
+        url: { dataType: 'string', required: true },
+        id: { dataType: 'string', required: true },
+      },
+      validators: {},
+    },
+  },
+  // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+  Stat: {
+    dataType: 'refAlias',
+    type: {
+      dataType: 'nestedObjectLiteral',
+      nestedProperties: {
+        tournament: {
+          dataType: 'nestedObjectLiteral',
+          nestedProperties: {
+            highest_finish: { dataType: 'double', required: true },
+            points: { dataType: 'double', required: true },
+            withdraw: { dataType: 'double', required: true },
+            count: { dataType: 'double', required: true },
+          },
+          required: true,
+        },
+        record: {
+          dataType: 'nestedObjectLiteral',
+          nestedProperties: {
+            timeout_percent: { dataType: 'double', required: true },
+            time_per_move: { dataType: 'double', required: true },
+            draw: { dataType: 'double', required: true },
+            loss: { dataType: 'double', required: true },
+            win: { dataType: 'double', required: true },
+          },
+          required: true,
+        },
+        best: {
+          dataType: 'nestedObjectLiteral',
+          nestedProperties: {
+            game: { dataType: 'string', required: true },
+            rating: { dataType: 'double', required: true },
+            date: { dataType: 'double', required: true },
+          },
+          required: true,
+        },
+        last: {
+          dataType: 'nestedObjectLiteral',
+          nestedProperties: {
+            rd: { dataType: 'double', required: true },
+            rating: { dataType: 'double', required: true },
+            date: { dataType: 'double', required: true },
+          },
+          required: true,
+        },
+      },
+      validators: {},
+    },
+  },
+  // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+  Stats: {
+    dataType: 'refAlias',
+    type: {
+      dataType: 'nestedObjectLiteral',
+      nestedProperties: {
+        puzzle_rush: {
+          dataType: 'nestedObjectLiteral',
+          nestedProperties: {
+            best: {
+              dataType: 'nestedObjectLiteral',
+              nestedProperties: {
+                score: { dataType: 'double', required: true },
+                total_attempts: { dataType: 'double', required: true },
+              },
+              required: true,
+            },
+            daily: {
+              dataType: 'nestedObjectLiteral',
+              nestedProperties: {
+                score: { dataType: 'double', required: true },
+                total_attempts: { dataType: 'double', required: true },
+              },
+              required: true,
+            },
+          },
+          required: true,
+        },
+        lessons: {
+          dataType: 'nestedObjectLiteral',
+          nestedProperties: {
+            lowest: {
+              dataType: 'nestedObjectLiteral',
+              nestedProperties: {
+                date: { dataType: 'double', required: true },
+                rating: { dataType: 'double', required: true },
+              },
+              required: true,
+            },
+            highest: {
+              dataType: 'nestedObjectLiteral',
+              nestedProperties: {
+                date: { dataType: 'double', required: true },
+                rating: { dataType: 'double', required: true },
+              },
+              required: true,
+            },
+          },
+          required: true,
+        },
+        tactics: {
+          dataType: 'nestedObjectLiteral',
+          nestedProperties: {
+            lowest: {
+              dataType: 'nestedObjectLiteral',
+              nestedProperties: {
+                date: { dataType: 'double', required: true },
+                rating: { dataType: 'double', required: true },
+              },
+              required: true,
+            },
+            highest: {
+              dataType: 'nestedObjectLiteral',
+              nestedProperties: {
+                date: { dataType: 'double', required: true },
+                rating: { dataType: 'double', required: true },
+              },
+              required: true,
+            },
+          },
+          required: true,
+        },
+        chess_blitz: { ref: 'Stat', required: true },
+        chess960_daily: { ref: 'Stat', required: true },
+        chess_daily: { ref: 'Stat', required: true },
+      },
+      validators: {},
+    },
+  },
+  // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+  DailyGame: {
+    dataType: 'refAlias',
+    type: {
+      dataType: 'nestedObjectLiteral',
+      nestedProperties: {
+        match: { dataType: 'string', required: true },
+        tournament: { dataType: 'string', required: true },
+        rules: { dataType: 'string', required: true },
+        time_class: { dataType: 'string', required: true },
+        time_control: { dataType: 'string', required: true },
+        start_time: { dataType: 'double', required: true },
+        last_activity: { dataType: 'double', required: true },
+        draw_offer: { dataType: 'double', required: true },
+        move_by: { dataType: 'double', required: true },
+        turn: { dataType: 'string', required: true },
+        pgn: { dataType: 'string', required: true },
+        fen: { dataType: 'string', required: true },
+        url: { dataType: 'string', required: true },
+        black: { dataType: 'string', required: true },
+        white: { dataType: 'string', required: true },
+      },
+      validators: {},
+    },
+  },
+  // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+  DailyToMoveGame: {
+    dataType: 'refAlias',
+    type: {
+      dataType: 'nestedObjectLiteral',
+      nestedProperties: {
+        last_activity: { dataType: 'double', required: true },
+        draw_offer: { dataType: 'boolean', required: true },
+        move_by: { dataType: 'double', required: true },
+        url: { dataType: 'string', required: true },
+      },
+      validators: {},
+    },
+  },
+  // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+  ChessClub: {
+    dataType: 'refAlias',
+    type: {
+      dataType: 'nestedObjectLiteral',
+      nestedProperties: {
+        joined: { dataType: 'double', required: true },
+        url: { dataType: 'string', required: true },
+        icon: { dataType: 'string', required: true },
+        last_activity: { dataType: 'double', required: true },
+        name: { dataType: 'string', required: true },
+        id: { dataType: 'string', required: true },
+      },
+      validators: {},
+    },
+  },
+  // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
   Isl: {
     dataType: 'refObject',
     properties: {
@@ -1848,6 +2081,368 @@ export function RegisterRoutes(app: Router) {
   //  NOTE: If you do not see routes for all of your controllers in this file, then you might not have informed tsoa of where to look
   //      Please look into the "controllerPathGlobs" config option described in the readme: https://github.com/lukeautry/tsoa
   // ###########################################################################################################
+  app.get(
+    '/api/chess.com/titled/:title',
+    ...fetchMiddlewares<RequestHandler>(ChessController),
+    ...fetchMiddlewares<RequestHandler>(
+      ChessController.prototype.getTitledPlayers
+    ),
+
+    function ChessController_getTitledPlayers(
+      request: any,
+      response: any,
+      next: any
+    ) {
+      const args = {
+        title: { in: 'path', name: 'title', required: true, ref: 'Title' },
+      };
+
+      // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+      let validatedArgs: any[] = [];
+      try {
+        validatedArgs = getValidatedArgs(args, request, response);
+
+        const controller = new ChessController();
+
+        const promise = controller.getTitledPlayers.apply(
+          controller,
+          validatedArgs as any
+        );
+        promiseHandler(controller, promise, response, 200, next);
+      } catch (err) {
+        return next(err);
+      }
+    }
+  );
+  // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+  app.get(
+    '/api/chess.com/player/:username',
+    ...fetchMiddlewares<RequestHandler>(ChessController),
+    ...fetchMiddlewares<RequestHandler>(
+      ChessController.prototype.getPlayerProfile
+    ),
+
+    function ChessController_getPlayerProfile(
+      request: any,
+      response: any,
+      next: any
+    ) {
+      const args = {
+        username: {
+          in: 'path',
+          name: 'username',
+          required: true,
+          dataType: 'string',
+        },
+      };
+
+      // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+      let validatedArgs: any[] = [];
+      try {
+        validatedArgs = getValidatedArgs(args, request, response);
+
+        const controller = new ChessController();
+
+        const promise = controller.getPlayerProfile.apply(
+          controller,
+          validatedArgs as any
+        );
+        promiseHandler(controller, promise, response, 200, next);
+      } catch (err) {
+        return next(err);
+      }
+    }
+  );
+  // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+  app.get(
+    '/api/chess.com/player/:username/stats',
+    ...fetchMiddlewares<RequestHandler>(ChessController),
+    ...fetchMiddlewares<RequestHandler>(
+      ChessController.prototype.getPlayerStats
+    ),
+
+    function ChessController_getPlayerStats(
+      request: any,
+      response: any,
+      next: any
+    ) {
+      const args = {
+        username: {
+          in: 'path',
+          name: 'username',
+          required: true,
+          dataType: 'string',
+        },
+      };
+
+      // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+      let validatedArgs: any[] = [];
+      try {
+        validatedArgs = getValidatedArgs(args, request, response);
+
+        const controller = new ChessController();
+
+        const promise = controller.getPlayerStats.apply(
+          controller,
+          validatedArgs as any
+        );
+        promiseHandler(controller, promise, response, 200, next);
+      } catch (err) {
+        return next(err);
+      }
+    }
+  );
+  // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+  app.get(
+    '/api/chess.com/player/:username/is-online',
+    ...fetchMiddlewares<RequestHandler>(ChessController),
+    ...fetchMiddlewares<RequestHandler>(
+      ChessController.prototype.getPlayerOnlineStatus
+    ),
+
+    function ChessController_getPlayerOnlineStatus(
+      request: any,
+      response: any,
+      next: any
+    ) {
+      const args = {
+        username: {
+          in: 'path',
+          name: 'username',
+          required: true,
+          dataType: 'string',
+        },
+      };
+
+      // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+      let validatedArgs: any[] = [];
+      try {
+        validatedArgs = getValidatedArgs(args, request, response);
+
+        const controller = new ChessController();
+
+        const promise = controller.getPlayerOnlineStatus.apply(
+          controller,
+          validatedArgs as any
+        );
+        promiseHandler(controller, promise, response, 200, next);
+      } catch (err) {
+        return next(err);
+      }
+    }
+  );
+  // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+  app.get(
+    '/api/chess.com/player/:username/games',
+    ...fetchMiddlewares<RequestHandler>(ChessController),
+    ...fetchMiddlewares<RequestHandler>(
+      ChessController.prototype.getPlayerDailyGames
+    ),
+
+    function ChessController_getPlayerDailyGames(
+      request: any,
+      response: any,
+      next: any
+    ) {
+      const args = {
+        username: {
+          in: 'path',
+          name: 'username',
+          required: true,
+          dataType: 'string',
+        },
+      };
+
+      // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+      let validatedArgs: any[] = [];
+      try {
+        validatedArgs = getValidatedArgs(args, request, response);
+
+        const controller = new ChessController();
+
+        const promise = controller.getPlayerDailyGames.apply(
+          controller,
+          validatedArgs as any
+        );
+        promiseHandler(controller, promise, response, 200, next);
+      } catch (err) {
+        return next(err);
+      }
+    }
+  );
+  // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+  app.get(
+    '/api/chess.com/player/:username/games/to-move',
+    ...fetchMiddlewares<RequestHandler>(ChessController),
+    ...fetchMiddlewares<RequestHandler>(
+      ChessController.prototype.getPlayerDailyToMoveGames
+    ),
+
+    function ChessController_getPlayerDailyToMoveGames(
+      request: any,
+      response: any,
+      next: any
+    ) {
+      const args = {
+        username: {
+          in: 'path',
+          name: 'username',
+          required: true,
+          dataType: 'string',
+        },
+      };
+
+      // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+      let validatedArgs: any[] = [];
+      try {
+        validatedArgs = getValidatedArgs(args, request, response);
+
+        const controller = new ChessController();
+
+        const promise = controller.getPlayerDailyToMoveGames.apply(
+          controller,
+          validatedArgs as any
+        );
+        promiseHandler(controller, promise, response, 200, next);
+      } catch (err) {
+        return next(err);
+      }
+    }
+  );
+  // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+  app.get(
+    '/api/chess.com/player/:username/games/archives',
+    ...fetchMiddlewares<RequestHandler>(ChessController),
+    ...fetchMiddlewares<RequestHandler>(
+      ChessController.prototype.getPlayerArchivedGames
+    ),
+
+    function ChessController_getPlayerArchivedGames(
+      request: any,
+      response: any,
+      next: any
+    ) {
+      const args = {
+        username: {
+          in: 'path',
+          name: 'username',
+          required: true,
+          dataType: 'string',
+        },
+      };
+
+      // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+      let validatedArgs: any[] = [];
+      try {
+        validatedArgs = getValidatedArgs(args, request, response);
+
+        const controller = new ChessController();
+
+        const promise = controller.getPlayerArchivedGames.apply(
+          controller,
+          validatedArgs as any
+        );
+        promiseHandler(controller, promise, response, 200, next);
+      } catch (err) {
+        return next(err);
+      }
+    }
+  );
+  // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+  app.get(
+    '/api/chess.com/player/:username/games/:year/:month',
+    ...fetchMiddlewares<RequestHandler>(ChessController),
+    ...fetchMiddlewares<RequestHandler>(
+      ChessController.prototype.getPlayerGamesByMonth
+    ),
+
+    function ChessController_getPlayerGamesByMonth(
+      request: any,
+      response: any,
+      next: any
+    ) {
+      const args = {
+        username: {
+          in: 'path',
+          name: 'username',
+          required: true,
+          dataType: 'string',
+        },
+        year: { in: 'path', name: 'year', required: true, dataType: 'string' },
+        month: {
+          in: 'path',
+          name: 'month',
+          required: true,
+          dataType: 'string',
+        },
+      };
+
+      // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+      let validatedArgs: any[] = [];
+      try {
+        validatedArgs = getValidatedArgs(args, request, response);
+
+        const controller = new ChessController();
+
+        const promise = controller.getPlayerGamesByMonth.apply(
+          controller,
+          validatedArgs as any
+        );
+        promiseHandler(controller, promise, response, 200, next);
+      } catch (err) {
+        return next(err);
+      }
+    }
+  );
+  // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+  app.get(
+    '/api/chess.com/player/:username/clubs',
+    ...fetchMiddlewares<RequestHandler>(ChessController),
+    ...fetchMiddlewares<RequestHandler>(
+      ChessController.prototype.getPlayerClubs
+    ),
+
+    function ChessController_getPlayerClubs(
+      request: any,
+      response: any,
+      next: any
+    ) {
+      const args = {
+        username: {
+          in: 'path',
+          name: 'username',
+          required: true,
+          dataType: 'string',
+        },
+      };
+
+      // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+      let validatedArgs: any[] = [];
+      try {
+        validatedArgs = getValidatedArgs(args, request, response);
+
+        const controller = new ChessController();
+
+        const promise = controller.getPlayerClubs.apply(
+          controller,
+          validatedArgs as any
+        );
+        promiseHandler(controller, promise, response, 200, next);
+      } catch (err) {
+        return next(err);
+      }
+    }
+  );
+  // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
   app.get(
     '/api/countries',
     ...fetchMiddlewares<RequestHandler>(CountriesController),

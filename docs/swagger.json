@@ -6,6 +6,433 @@
     "requestBodies": {},
     "responses": {},
     "schemas": {
+      "Title": {
+        "type": "string",
+        "enum": [
+          "GM",
+          "WGM",
+          "IM",
+          "WIM",
+          "FM",
+          "WFM",
+          "NM",
+          "WNM",
+          "CM",
+          "WCM"
+        ]
+      },
+      "Profile": {
+        "properties": {
+          "fide": {
+            "type": "number",
+            "format": "double"
+          },
+          "twitch_url": {
+            "type": "string"
+          },
+          "is_streamer": {
+            "type": "boolean"
+          },
+          "followers": {
+            "type": "number",
+            "format": "double"
+          },
+          "last_online": {
+            "type": "number",
+            "format": "double"
+          },
+          "joined": {
+            "type": "number",
+            "format": "double"
+          },
+          "country": {
+            "type": "string"
+          },
+          "location": {
+            "type": "string"
+          },
+          "avatar": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "player_id": {
+            "type": "number",
+            "format": "double"
+          },
+          "username": {
+            "type": "string"
+          },
+          "url": {
+            "type": "string"
+          },
+          "id": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "fide",
+          "twitch_url",
+          "is_streamer",
+          "followers",
+          "last_online",
+          "joined",
+          "country",
+          "location",
+          "avatar",
+          "name",
+          "status",
+          "title",
+          "player_id",
+          "username",
+          "url",
+          "id"
+        ],
+        "type": "object"
+      },
+      "Stat": {
+        "properties": {
+          "tournament": {
+            "properties": {
+              "highest_finish": {
+                "type": "number",
+                "format": "double"
+              },
+              "points": {
+                "type": "number",
+                "format": "double"
+              },
+              "withdraw": {
+                "type": "number",
+                "format": "double"
+              },
+              "count": {
+                "type": "number",
+                "format": "double"
+              }
+            },
+            "required": ["highest_finish", "points", "withdraw", "count"],
+            "type": "object"
+          },
+          "record": {
+            "properties": {
+              "timeout_percent": {
+                "type": "number",
+                "format": "double"
+              },
+              "time_per_move": {
+                "type": "number",
+                "format": "double"
+              },
+              "draw": {
+                "type": "number",
+                "format": "double"
+              },
+              "loss": {
+                "type": "number",
+                "format": "double"
+              },
+              "win": {
+                "type": "number",
+                "format": "double"
+              }
+            },
+            "required": [
+              "timeout_percent",
+              "time_per_move",
+              "draw",
+              "loss",
+              "win"
+            ],
+            "type": "object"
+          },
+          "best": {
+            "properties": {
+              "game": {
+                "type": "string"
+              },
+              "rating": {
+                "type": "number",
+                "format": "double"
+              },
+              "date": {
+                "type": "number",
+                "format": "double"
+              }
+            },
+            "required": ["game", "rating", "date"],
+            "type": "object"
+          },
+          "last": {
+            "properties": {
+              "rd": {
+                "type": "number",
+                "format": "double"
+              },
+              "rating": {
+                "type": "number",
+                "format": "double"
+              },
+              "date": {
+                "type": "number",
+                "format": "double"
+              }
+            },
+            "required": ["rd", "rating", "date"],
+            "type": "object"
+          }
+        },
+        "required": ["tournament", "record", "best", "last"],
+        "type": "object"
+      },
+      "Stats": {
+        "properties": {
+          "puzzle_rush": {
+            "properties": {
+              "best": {
+                "properties": {
+                  "score": {
+                    "type": "number",
+                    "format": "double"
+                  },
+                  "total_attempts": {
+                    "type": "number",
+                    "format": "double"
+                  }
+                },
+                "required": ["score", "total_attempts"],
+                "type": "object"
+              },
+              "daily": {
+                "properties": {
+                  "score": {
+                    "type": "number",
+                    "format": "double"
+                  },
+                  "total_attempts": {
+                    "type": "number",
+                    "format": "double"
+                  }
+                },
+                "required": ["score", "total_attempts"],
+                "type": "object"
+              }
+            },
+            "required": ["best", "daily"],
+            "type": "object"
+          },
+          "lessons": {
+            "properties": {
+              "lowest": {
+                "properties": {
+                  "date": {
+                    "type": "number",
+                    "format": "double"
+                  },
+                  "rating": {
+                    "type": "number",
+                    "format": "double"
+                  }
+                },
+                "required": ["date", "rating"],
+                "type": "object"
+              },
+              "highest": {
+                "properties": {
+                  "date": {
+                    "type": "number",
+                    "format": "double"
+                  },
+                  "rating": {
+                    "type": "number",
+                    "format": "double"
+                  }
+                },
+                "required": ["date", "rating"],
+                "type": "object"
+              }
+            },
+            "required": ["lowest", "highest"],
+            "type": "object"
+          },
+          "tactics": {
+            "properties": {
+              "lowest": {
+                "properties": {
+                  "date": {
+                    "type": "number",
+                    "format": "double"
+                  },
+                  "rating": {
+                    "type": "number",
+                    "format": "double"
+                  }
+                },
+                "required": ["date", "rating"],
+                "type": "object"
+              },
+              "highest": {
+                "properties": {
+                  "date": {
+                    "type": "number",
+                    "format": "double"
+                  },
+                  "rating": {
+                    "type": "number",
+                    "format": "double"
+                  }
+                },
+                "required": ["date", "rating"],
+                "type": "object"
+              }
+            },
+            "required": ["lowest", "highest"],
+            "type": "object"
+          },
+          "chess_blitz": {
+            "$ref": "#/components/schemas/Stat"
+          },
+          "chess960_daily": {
+            "$ref": "#/components/schemas/Stat"
+          },
+          "chess_daily": {
+            "$ref": "#/components/schemas/Stat"
+          }
+        },
+        "required": [
+          "puzzle_rush",
+          "lessons",
+          "tactics",
+          "chess_blitz",
+          "chess960_daily",
+          "chess_daily"
+        ],
+        "type": "object"
+      },
+      "DailyGame": {
+        "properties": {
+          "match": {
+            "type": "string"
+          },
+          "tournament": {
+            "type": "string"
+          },
+          "rules": {
+            "type": "string"
+          },
+          "time_class": {
+            "type": "string"
+          },
+          "time_control": {
+            "type": "string"
+          },
+          "start_time": {
+            "type": "number",
+            "format": "double"
+          },
+          "last_activity": {
+            "type": "number",
+            "format": "double"
+          },
+          "draw_offer": {
+            "type": "number",
+            "format": "double"
+          },
+          "move_by": {
+            "type": "number",
+            "format": "double"
+          },
+          "turn": {
+            "type": "string"
+          },
+          "pgn": {
+            "type": "string"
+          },
+          "fen": {
+            "type": "string"
+          },
+          "url": {
+            "type": "string"
+          },
+          "black": {
+            "type": "string"
+          },
+          "white": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "match",
+          "tournament",
+          "rules",
+          "time_class",
+          "time_control",
+          "start_time",
+          "last_activity",
+          "draw_offer",
+          "move_by",
+          "turn",
+          "pgn",
+          "fen",
+          "url",
+          "black",
+          "white"
+        ],
+        "type": "object"
+      },
+      "DailyToMoveGame": {
+        "properties": {
+          "last_activity": {
+            "type": "number",
+            "format": "double"
+          },
+          "draw_offer": {
+            "type": "boolean"
+          },
+          "move_by": {
+            "type": "number",
+            "format": "double"
+          },
+          "url": {
+            "type": "string"
+          }
+        },
+        "required": ["last_activity", "draw_offer", "move_by", "url"],
+        "type": "object"
+      },
+      "ChessClub": {
+        "properties": {
+          "joined": {
+            "type": "number",
+            "format": "double"
+          },
+          "url": {
+            "type": "string"
+          },
+          "icon": {
+            "type": "string"
+          },
+          "last_activity": {
+            "type": "number",
+            "format": "double"
+          },
+          "name": {
+            "type": "string"
+          },
+          "id": {
+            "type": "string"
+          }
+        },
+        "required": ["joined", "url", "icon", "last_activity", "name", "id"],
+        "type": "object"
+      },
       "Isl": {
         "properties": {
           "official": {
@@ -3928,6 +4355,343 @@
   },
   "openapi": "3.0.0",
   "paths": {
+    "/api/chess.com/titled/{title}": {
+      "get": {
+        "operationId": "GetTitledPlayers",
+        "responses": {
+          "200": {
+            "description": "Get Titled Players",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "players": {
+                      "items": {
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": ["players"],
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "tags": ["chess.com"],
+        "security": [],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "title",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/Title"
+            }
+          }
+        ]
+      }
+    },
+    "/api/chess.com/player/{username}": {
+      "get": {
+        "operationId": "GetPlayerProfile",
+        "responses": {
+          "200": {
+            "description": "Get Profile",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Profile"
+                }
+              }
+            }
+          }
+        },
+        "tags": ["chess.com"],
+        "security": [],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "username",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/api/chess.com/player/{username}/stats": {
+      "get": {
+        "operationId": "GetPlayerStats",
+        "responses": {
+          "200": {
+            "description": "Get Profile",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Stats"
+                }
+              }
+            }
+          }
+        },
+        "tags": ["chess.com"],
+        "security": [],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "username",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/api/chess.com/player/{username}/is-online": {
+      "get": {
+        "operationId": "GetPlayerOnlineStatus",
+        "responses": {
+          "200": {
+            "description": "Get Players' Online Status",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "online": {
+                      "type": "boolean"
+                    }
+                  },
+                  "required": ["online"],
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "tags": ["chess.com"],
+        "security": [],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "username",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/api/chess.com/player/{username}/games": {
+      "get": {
+        "operationId": "GetPlayerDailyGames",
+        "responses": {
+          "200": {
+            "description": "Get Players' Daily Games",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "games": {
+                      "items": {
+                        "$ref": "#/components/schemas/DailyGame"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": ["games"],
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "tags": ["chess.com"],
+        "security": [],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "username",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/api/chess.com/player/{username}/games/to-move": {
+      "get": {
+        "operationId": "GetPlayerDailyToMoveGames",
+        "responses": {
+          "200": {
+            "description": "Get Players' Daily To-Move Games",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "games": {
+                      "items": {
+                        "$ref": "#/components/schemas/DailyToMoveGame"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": ["games"],
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "tags": ["chess.com"],
+        "security": [],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "username",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/api/chess.com/player/{username}/games/archives": {
+      "get": {
+        "operationId": "GetPlayerArchivedGames",
+        "responses": {
+          "200": {
+            "description": "Get Players' Archived Games",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "archives": {
+                      "items": {
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": ["archives"],
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "tags": ["chess.com"],
+        "security": [],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "username",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/api/chess.com/player/{username}/games/{year}/{month}": {
+      "get": {
+        "operationId": "GetPlayerGamesByMonth",
+        "responses": {
+          "200": {
+            "description": "Get Players' Archived Games",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "archives": {
+                      "items": {
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": ["archives"],
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "tags": ["chess.com"],
+        "security": [],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "username",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "year",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "month",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/api/chess.com/player/{username}/clubs": {
+      "get": {
+        "operationId": "GetPlayerClubs",
+        "responses": {
+          "200": {
+            "description": "Get Players' Clubs",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "clubs": {
+                      "items": {
+                        "$ref": "#/components/schemas/ChessClub"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": ["clubs"],
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "tags": ["chess.com"],
+        "security": [],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "username",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
     "/api/countries": {
       "get": {
         "operationId": "GetCountries",
