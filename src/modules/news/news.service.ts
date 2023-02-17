@@ -135,7 +135,7 @@ export const getHeadlines = async (
     return articles;
   } catch (error) {
     logger.error(`getHeadlines Error ${error}`);
-    throw new Error('Error');
+    throw new Error('getHeadlines Error');
   } finally {
     await redisClient.disconnect();
   }

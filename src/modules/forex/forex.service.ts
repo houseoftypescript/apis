@@ -35,10 +35,11 @@ export const syncRates = async (): Promise<SyncResponse> => {
     logger.info('PostgreSQL is connected');
     // Get Rates from Fixer API
     const fixerData = await getFixerRates();
-    logger.info('Get Forex Rates from Fixer API');
+    logger.info(`Get Forex Rates from Fixer API ${JSON.stringify(fixerData)}`);
     // Get Currencies from PostgreSQL
     const currencies: ForexCurrency[] =
       await prismaClient.forexCurrency.findMany();
+    logger.info(`Get Currencies from PostgreSQL ${JSON.stringify(currencies)}`);
     const availableCodes: string[] = currencies.map(
       (currency) => currency.code
     );
@@ -51,6 +52,7 @@ export const syncRates = async (): Promise<SyncResponse> => {
         const rate: number = fixerRates[code];
         return { code, date, rate };
       });
+    logger.info(`Transform Fixer Data to Rates ${JSON.stringify(rates)}`);
     // Sync Data
     const batchPayload: Prisma.BatchPayload =
       await prismaClient.forexRate.createMany({

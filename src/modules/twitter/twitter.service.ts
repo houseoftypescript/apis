@@ -24,7 +24,7 @@ export const getTrends = async (id = 1): Promise<Trend[]> => {
     return trends;
   } catch (error) {
     logger.error(`getTrends Error ${error}`);
-    throw new Error('Error');
+    throw new Error('getTrends Error');
   } finally {
     await redisClient.disconnect();
   }
@@ -48,7 +48,7 @@ export const getPlaces = async (): Promise<Place[]> => {
     return places;
   } catch (error) {
     logger.error(`getPlaces Error ${error}`);
-    throw new Error('Error');
+    throw new Error('getPlaces Error');
   } finally {
     await redisClient.disconnect();
   }

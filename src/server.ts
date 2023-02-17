@@ -73,13 +73,13 @@ const main = async () => {
   });
 };
 
-main().catch((error: Error) => logger.error('Error', error));
+main().catch((error: Error) => logger.error(`main error ${error}`));
 
 process.on('unhandledRejection', (reason: string) => {
-  throw reason;
+  throw new Error(`unhandledRejection ${reason}`);
 });
 
 process.on('uncaughtException', (error: Error) => {
-  logger.error('Error', error);
+  logger.error(`uncaughtException ${error}`);
   process.exit(1);
 });
