@@ -1,0 +1,37 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - master
+      - develop
+      - hotfix/**
+      - feature/**
+      - renovate/**
+
+jobs:
+  ci:
+    strategy:
+      fail-fast: false
+      matrix:
+        node:
+          - name: Node.js 18.x
+            version: 18.x
+        os:
+          - name: Ubuntu
+            version: ubuntu-latest
+    runs-on: CI - ${{ matrix.os.version }} - ${{ matrix.node.name }}
+    name: ${{ matrix.os.name }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Install Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node.version }}
+      - name: Install Dependencies
+        run: yarn install --network-timeout 86400000
+      - name: Unit Test
+        run: yarn test
+      - name: Build Production
+        run: yarn build
