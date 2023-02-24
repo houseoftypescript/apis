@@ -20,8 +20,8 @@ jobs:
         os:
           - name: Ubuntu
             version: ubuntu-latest
-    runs-on: CI - ${{ matrix.os.version }} - ${{ matrix.node.name }}
-    name: ${{ matrix.os.name }}
+    runs-on: ${{ matrix.os.version }}
+    name: ${{ matrix.os.name }} - ${{ matrix.node.name }}
     steps:
       - name: Checkout
         uses: actions/checkout@v3
