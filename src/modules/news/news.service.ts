@@ -10,6 +10,7 @@ import {
   ArticlesResponse,
   Language,
   NewsCategory,
+  NewsCountryCode,
   SearchIn,
   SortBy,
   SourcesResponse,
@@ -26,7 +27,7 @@ export const getNews = async (
     excludeDomains = [],
     from = '',
     to = '',
-    language = '',
+    language = 'en',
     sortBy = 'publishedAt',
     pageSize = 100,
     page = 1,
@@ -50,7 +51,7 @@ export const getNews = async (
     excludeDomains: [],
     from: '',
     to: '',
-    language: '',
+    language: 'en',
     sortBy: 'publishedAt',
     pageSize: 100,
     page: 1,
@@ -81,22 +82,22 @@ export const getNews = async (
 export const getHeadlines = async (
   {
     query = '',
-    category = '',
-    country = '',
+    category = 'general',
+    country = 'us',
     sources = [],
     page = 1,
     pageSize = 100,
   }: {
     query?: string;
     category?: NewsCategory;
-    country?: string;
+    country?: NewsCountryCode;
     sources?: string[];
     page?: number;
     pageSize?: number;
   } = {
     query: '',
-    category: '',
-    country: '',
+    category: 'general',
+    country: 'us',
     sources: [],
     page: 1,
     pageSize: 100,

@@ -2761,7 +2761,7 @@ components:
         - 'relevancy'
         - 'popularity'
         - 'publishedAt'
-    CountryCode:
+    NewsCountryCode:
       type: 'string'
       enum:
         - 'ae'
@@ -4062,7 +4062,7 @@ paths:
           name: 'country'
           required: false
           schema:
-            $ref: '#/components/schemas/CountryCode'
+            $ref: '#/components/schemas/NewsCountryCode'
         - in: 'query'
           name: 'category'
           required: false
@@ -4348,4 +4348,5 @@ paths:
       security: []
       parameters: []
 servers:
-  - url: '/'
+  - url: 'http://localhost:8080'
+    description: 'Local development'

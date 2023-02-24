@@ -3668,7 +3668,7 @@
         "type": "string",
         "enum": ["relevancy", "popularity", "publishedAt"]
       },
-      "CountryCode": {
+      "NewsCountryCode": {
         "type": "string",
         "enum": [
           "ae",
@@ -5438,7 +5438,7 @@
             "name": "country",
             "required": false,
             "schema": {
-              "$ref": "#/components/schemas/CountryCode"
+              "$ref": "#/components/schemas/NewsCountryCode"
             }
           },
           {
@@ -5861,7 +5861,8 @@
   },
   "servers": [
     {
-      "url": "/"
+      "url": "http://localhost:8080",
+      "description": "Local development"
     }
   ]
 }

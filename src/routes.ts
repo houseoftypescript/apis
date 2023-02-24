@@ -1682,7 +1682,7 @@ const models: TsoaRoute.Models = {
     },
   },
   // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-  CountryCode: {
+  NewsCountryCode: {
     dataType: 'refAlias',
     type: {
       dataType: 'union',
@@ -3064,7 +3064,7 @@ export function RegisterRoutes(app: Router) {
         from: { default: '', in: 'query', name: 'from', dataType: 'string' },
         to: { default: '', in: 'query', name: 'to', dataType: 'string' },
         language: {
-          default: '',
+          default: 'en',
           in: 'query',
           name: 'language',
           ref: 'Language',
@@ -3116,13 +3116,13 @@ export function RegisterRoutes(app: Router) {
       const args = {
         query: { default: '', in: 'query', name: 'query', dataType: 'string' },
         country: {
-          default: '',
+          default: 'us',
           in: 'query',
           name: 'country',
-          ref: 'CountryCode',
+          ref: 'NewsCountryCode',
         },
         category: {
-          default: '',
+          default: 'general',
           in: 'query',
           name: 'category',
           ref: 'NewsCategory',

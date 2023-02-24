@@ -23,7 +23,7 @@ export type SourcesResponse = {
   sources: Source[];
 };
 
-export type CountryCode =
+export type NewsCountryCode =
   | 'ae'
   | 'ar'
   | 'at'

@@ -3,9 +3,9 @@ import { Controller, Get, Query, Route, SuccessResponse, Tags } from 'tsoa';
 import { getHeadlines, getNews, getSources } from './news.service';
 import {
   Article,
-  CountryCode,
   Language,
   NewsCategory,
+  NewsCountryCode,
   SearchIn,
   SortBy,
 } from './news.types';
@@ -20,7 +20,7 @@ export class NewsController extends Controller {
     @Query('searchIn') searchIn: SearchIn = '',
     @Query('from') from = '',
     @Query('to') to = '',
-    @Query('language') language: Language = '',
+    @Query('language') language: Language = 'en',
     @Query('sortBy') sortBy: SortBy = 'publishedAt',
     @Query('page') page = 1,
     @Query('pageSize') pageSize = 100
@@ -41,8 +41,8 @@ export class NewsController extends Controller {
   @SuccessResponse('200', 'Get Headlines')
   public getHeadlines(
     @Query('query') query = '',
-    @Query('country') country: CountryCode = '',
-    @Query('category') category: NewsCategory = '',
+    @Query('country') country: NewsCountryCode = 'us',
+    @Query('category') category: NewsCategory = 'general',
     @Query('page') page = 1,
     @Query('pageSize') pageSize = 100
   ): Promise<Article[]> {
