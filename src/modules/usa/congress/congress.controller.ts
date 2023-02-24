@@ -19,7 +19,7 @@ import {
 @Route('api/usa/congress')
 export class CongressController extends Controller {
   @Get()
-  @SuccessResponse('200', 'Get congress')
+  @SuccessResponse('200', 'Get Congress')
   public async getCongress(): Promise<{
     congresses: number[];
     chambers: Chamber[];

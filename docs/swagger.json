@@ -4247,6 +4247,172 @@
         "required": ["results", "copyright", "status"],
         "type": "object"
       },
+      "VnExpressArticle": {
+        "properties": {
+          "type_new": {
+            "type": "string"
+          },
+          "vn_zone": {
+            "type": "number",
+            "format": "double"
+          },
+          "content": {
+            "type": "string"
+          },
+          "off_thumb": {
+            "type": "string"
+          },
+          "location_name": {
+            "type": "string"
+          },
+          "article_category": {
+            "properties": {
+              "cate_url": {
+                "type": "string"
+              },
+              "cate_name": {
+                "type": "string"
+              }
+            },
+            "required": ["cate_url", "cate_name"],
+            "type": "object"
+          },
+          "iscomment": {
+            "type": "string"
+          },
+          "score": {
+            "type": "string"
+          },
+          "author_id": {
+            "type": "string"
+          },
+          "article_icon": {
+            "type": "number",
+            "format": "double"
+          },
+          "privacy": {
+            "type": "string"
+          },
+          "publish_time_format": {
+            "type": "string"
+          },
+          "publish_time": {
+            "type": "string"
+          },
+          "thumbnail_url3": {
+            "type": "string"
+          },
+          "thumbnail_url2": {
+            "type": "string"
+          },
+          "thumbnail_url": {
+            "type": "string"
+          },
+          "thumb_list": {
+            "properties": {
+              "thumb_120_72_100_2_crop": {
+                "type": "string"
+              },
+              "thumb_120_72_100_1_crop": {
+                "type": "string"
+              },
+              "thumb_100_100_100_2_crop": {
+                "type": "string"
+              },
+              "thumb_100_100_100_1_crop": {
+                "type": "string"
+              },
+              "thumb_300_180_100_2_crop": {
+                "type": "string"
+              },
+              "thumb_300_180_100_1_crop": {
+                "type": "string"
+              },
+              "thumb_380_228_100_2_crop": {
+                "type": "string"
+              },
+              "thumb_380_228_100_1_crop": {
+                "type": "string"
+              },
+              "thumb_default": {
+                "type": "string"
+              },
+              "thumb_500_300_100_2_crop": {
+                "type": "string"
+              },
+              "thumb_500_300_100_1_crop": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "thumb_120_72_100_2_crop",
+              "thumb_120_72_100_1_crop",
+              "thumb_100_100_100_2_crop",
+              "thumb_100_100_100_1_crop",
+              "thumb_300_180_100_2_crop",
+              "thumb_300_180_100_1_crop",
+              "thumb_380_228_100_2_crop",
+              "thumb_380_228_100_1_crop",
+              "thumb_default",
+              "thumb_500_300_100_2_crop",
+              "thumb_500_300_100_1_crop"
+            ],
+            "type": "object"
+          },
+          "share_url": {
+            "type": "string"
+          },
+          "lead": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "site_id": {
+            "type": "string"
+          },
+          "original_cate": {
+            "type": "string"
+          },
+          "article_type": {
+            "type": "string"
+          },
+          "category_id": {
+            "type": "string"
+          },
+          "article_id": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "type_new",
+          "vn_zone",
+          "content",
+          "off_thumb",
+          "location_name",
+          "article_category",
+          "iscomment",
+          "score",
+          "author_id",
+          "article_icon",
+          "privacy",
+          "publish_time_format",
+          "publish_time",
+          "thumbnail_url3",
+          "thumbnail_url2",
+          "thumbnail_url",
+          "thumb_list",
+          "share_url",
+          "lead",
+          "title",
+          "site_id",
+          "original_cate",
+          "article_type",
+          "category_id",
+          "article_id"
+        ],
+        "type": "object"
+      },
       "Weather": {
         "properties": {
           "minTemperature": {
@@ -5456,7 +5622,7 @@
         "operationId": "GetCongress",
         "responses": {
           "200": {
-            "description": "Get congress",
+            "description": "Get Congress",
             "content": {
               "application/json": {
                 "schema": {
@@ -5616,6 +5782,29 @@
             }
           }
         ]
+      }
+    },
+    "/api/vietnam/vnexpress": {
+      "get": {
+        "operationId": "GetHome",
+        "responses": {
+          "200": {
+            "description": "Get Home",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/VnExpressArticle"
+                  },
+                  "type": "array"
+                }
+              }
+            }
+          }
+        },
+        "tags": ["VnExpress"],
+        "security": [],
+        "parameters": []
       }
     },
     "/api/weather": {

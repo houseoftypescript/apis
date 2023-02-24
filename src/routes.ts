@@ -38,6 +38,8 @@ import { TwitterController } from './modules/twitter/twitter.controller';
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 import { CongressController } from './modules/usa/congress/congress.controller';
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+import { VnExpressController } from './modules/vietnam/vnexpress/vnexpress.controller';
+// WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 import { WeatherController } from './modules/weather/weather.controller';
 import type { RequestHandler, Router } from 'express';
 
@@ -1996,6 +1998,64 @@ const models: TsoaRoute.Models = {
     },
   },
   // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+  VnExpressArticle: {
+    dataType: 'refAlias',
+    type: {
+      dataType: 'nestedObjectLiteral',
+      nestedProperties: {
+        type_new: { dataType: 'string', required: true },
+        vn_zone: { dataType: 'double', required: true },
+        content: { dataType: 'string', required: true },
+        off_thumb: { dataType: 'string', required: true },
+        location_name: { dataType: 'string', required: true },
+        article_category: {
+          dataType: 'nestedObjectLiteral',
+          nestedProperties: {
+            cate_url: { dataType: 'string', required: true },
+            cate_name: { dataType: 'string', required: true },
+          },
+          required: true,
+        },
+        iscomment: { dataType: 'string', required: true },
+        score: { dataType: 'string', required: true },
+        author_id: { dataType: 'string', required: true },
+        article_icon: { dataType: 'double', required: true },
+        privacy: { dataType: 'string', required: true },
+        publish_time_format: { dataType: 'string', required: true },
+        publish_time: { dataType: 'string', required: true },
+        thumbnail_url3: { dataType: 'string', required: true },
+        thumbnail_url2: { dataType: 'string', required: true },
+        thumbnail_url: { dataType: 'string', required: true },
+        thumb_list: {
+          dataType: 'nestedObjectLiteral',
+          nestedProperties: {
+            thumb_120_72_100_2_crop: { dataType: 'string', required: true },
+            thumb_120_72_100_1_crop: { dataType: 'string', required: true },
+            thumb_100_100_100_2_crop: { dataType: 'string', required: true },
+            thumb_100_100_100_1_crop: { dataType: 'string', required: true },
+            thumb_300_180_100_2_crop: { dataType: 'string', required: true },
+            thumb_300_180_100_1_crop: { dataType: 'string', required: true },
+            thumb_380_228_100_2_crop: { dataType: 'string', required: true },
+            thumb_380_228_100_1_crop: { dataType: 'string', required: true },
+            thumb_default: { dataType: 'string', required: true },
+            thumb_500_300_100_2_crop: { dataType: 'string', required: true },
+            thumb_500_300_100_1_crop: { dataType: 'string', required: true },
+          },
+          required: true,
+        },
+        share_url: { dataType: 'string', required: true },
+        lead: { dataType: 'string', required: true },
+        title: { dataType: 'string', required: true },
+        site_id: { dataType: 'string', required: true },
+        original_cate: { dataType: 'string', required: true },
+        article_type: { dataType: 'string', required: true },
+        category_id: { dataType: 'string', required: true },
+        article_id: { dataType: 'string', required: true },
+      },
+      validators: {},
+    },
+  },
+  // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
   Weather: {
     dataType: 'refAlias',
     type: {
@@ -3452,6 +3512,37 @@ export function RegisterRoutes(app: Router) {
         const controller = new CongressController();
 
         const promise = controller.getCommittee.apply(
+          controller,
+          validatedArgs as any
+        );
+        promiseHandler(controller, promise, response, 200, next);
+      } catch (err) {
+        return next(err);
+      }
+    }
+  );
+  // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+  app.get(
+    '/api/vietnam/vnexpress',
+    ...fetchMiddlewares<RequestHandler>(VnExpressController),
+    ...fetchMiddlewares<RequestHandler>(VnExpressController.prototype.getHome),
+
+    function VnExpressController_getHome(
+      request: any,
+      response: any,
+      next: any
+    ) {
+      const args = {};
+
+      // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+      let validatedArgs: any[] = [];
+      try {
+        validatedArgs = getValidatedArgs(args, request, response);
+
+        const controller = new VnExpressController();
+
+        const promise = controller.getHome.apply(
           controller,
           validatedArgs as any
         );
