@@ -46,7 +46,7 @@
     "morgan": "1.10.0",
     "pino": "8.11.0",
     "pino-pretty": "9.4.0",
-    "redis": "4.6.4",
+    "redis": "4.6.5",
     "tsoa": "5.1.1"
   },
   "devDependencies": {
