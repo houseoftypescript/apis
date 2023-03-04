@@ -4349,4 +4349,6 @@ paths:
       parameters: []
 servers:
   - url: 'http://localhost:8080'
-    description: 'Local development'
+    description: 'Local'
+  - url: 'https://homapis.vercel.app'
+    description: 'Vercel'
